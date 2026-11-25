@@ -1,0 +1,21 @@
+{
+  "name": "fightclub",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Jeu de combat local façon platform-fighter : l'écran affiche l'arène, les téléphones servent de manettes.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

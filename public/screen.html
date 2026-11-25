@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#040816">
+  <title>FightClub · Édition présidentielle</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/screen.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <header class="ticker" id="ticker">
+    <span class="live">EN DIRECT</span>
+    <div class="ticker-track"><span class="ticker-text" id="ticker-text"></span></div>
+  </header>
+
+  <section id="lobby" class="overlay">
+    <div class="lobby-left">
+      <h1 class="logo big"><span class="l1">Fight</span><span class="l2">Club</span></h1>
+      <p class="banner big" style="--c: var(--rouge)">Édition présidentielle</p>
+      <p class="tagline">Le débat présidentiel qui finit en baston.</p>
+
+      <div class="frame join" style="--c: var(--bleu)">
+        <p class="banner">Rejoindre le débat</p>
+        <div class="join-body">
+          <div class="qr" id="qr"></div>
+          <div class="join-fields">
+            <span class="field-label">Bureau de vote</span>
+            <strong id="room-code" class="room-code">····</strong>
+            <span class="field-label">Sur le téléphone</span>
+            <span id="join-url" class="join-url">…</span>
+          </div>
+        </div>
+        <p id="net-status" class="net-status"></p>
+      </div>
+    </div>
+
+    <div class="lobby-right">
+      <div class="slots">
+        <article class="poster empty" style="--c: var(--p1)">
+          <div class="poster-art">
+            <img class="portrait" alt="">
+            <canvas width="240" height="240"></canvas>
+            <span class="badge">P1</span>
+            <span class="type"></span>
+          </div>
+          <div class="poster-info">
+            <h3 class="name">Candidature vacante</h3>
+            <p class="char"></p>
+            <p class="slogan"></p>
+            <p class="status"></p>
+          </div>
+          <div class="stamp">Candidature validée</div>
+        </article>
+        <div class="vs">VS</div>
+        <article class="poster empty" style="--c: var(--p2)">
+          <div class="poster-art">
+            <img class="portrait" alt="">
+            <canvas width="240" height="240"></canvas>
+            <span class="badge">P2</span>
+            <span class="type"></span>
+          </div>
+          <div class="poster-info">
+            <h3 class="name">Candidature vacante</h3>
+            <p class="char"></p>
+            <p class="slogan"></p>
+            <p class="status"></p>
+          </div>
+          <div class="stamp">Candidature validée</div>
+        </article>
+      </div>
+      <p class="banner roster-label" style="--c: var(--or-dark)">Les candidats</p>
+      <div id="roster" class="roster"></div>
+      <p id="lobby-msg" class="lobby-msg"></p>
+      <p class="keys">
+        <kbd>K</kbd> jouer au clavier · <kbd>C</kbd> ajouter un CPU · <kbd>Suppr</kbd> retirer · <kbd>F</kbd> plein écran ·
+        clavier : <kbd>←</kbd> <kbd>→</kbd> candidat, <kbd>Entrée</kbd> prêt<br>
+        En combat : flèches · <kbd>Espace</kbd> saut · <kbd>X</kbd> attaque · <kbd>C</kbd> spécial · <kbd>V</kbd> bouclier · <kbd>Échap</kbd> quitter
+      </p>
+    </div>
+  </section>
+
+  <section id="results" class="overlay hidden">
+    <div class="frame results-card" id="results-card">
+      <p class="banner big">Résultats du second tour</p>
+      <div class="results-main">
+        <div class="win-art">
+          <img id="win-portrait" class="portrait" alt="">
+          <canvas id="win-canvas" width="260" height="260"></canvas>
+        </div>
+        <div class="win-text">
+          <p class="elected">Élu !</p>
+          <h1 id="win-name" class="win-name"></h1>
+          <p id="win-char" class="win-char"></p>
+          <p id="win-score" class="win-score"></p>
+        </div>
+      </div>
+      <table id="win-stats"></table>
+      <p class="hint">Appuyez sur <b>Nouvelle élection</b> sur vos téléphones · <kbd>Entrée</kbd></p>
+    </div>
+  </section>
+
+  <section id="pause" class="overlay hidden">
+    <div class="frame pause-card" style="--c: var(--rouge)">
+      <p class="banner">Assemblée nationale</p>
+      <h2>Suspension de séance</h2>
+      <p id="pause-text"></p>
+    </div>
+  </section>
+
+  <div id="sound-hint" class="toast">Clique ou appuie sur une touche pour activer le son</div>
+  <div id="conn" class="toast top hidden"></div>
+
+  <script type="module" src="/js/screen/main.js"></script>
+</body>
+</html>

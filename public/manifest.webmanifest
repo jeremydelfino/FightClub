@@ -1,0 +1,9 @@
+{
+  "name": "FightClub",
+  "short_name": "FightClub",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#07031a",
+  "theme_color": "#07031a"
+}

@@ -1,0 +1,4564 @@
+{
+  "zemmour": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      22,
+      92,
+      1512,
+      562
+    ],
+    "icon": [
+      18,
+      586,
+      442,
+      1006
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          58,
+          62,
+          628,
+          252
+        ],
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          690,
+          62,
+          1498,
+          252
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          8,
+          334,
+          852,
+          497
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            28,
+            612,
+            160,
+            742
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            152,
+            576,
+            292,
+            754
+          ],
+          [
+            298,
+            554,
+            422,
+            738
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          448,
+          570,
+          1032,
+          742
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1058,
+          572,
+          1512,
+          738
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          18,
+          834,
+          472,
+          998
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            512,
+            860,
+            648,
+            998
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          878,
+          336,
+          1512,
+          497
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            738,
+            836,
+            872,
+            998
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          902,
+          834,
+          1518,
+          998
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          40,
+          58,
+          692,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          210,
+          470
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          778,
+          38,
+          1522,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          222,
+          562
+        ],
+        "clear": [
+          [
+            748,
+            0,
+            1150,
+            66
+          ]
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          38,
+          295,
+          667,
+          508
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          195,
+          460
+        ],
+        "clear": [
+          [
+            8,
+            272,
+            282,
+            336
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          772,
+          338,
+          1512,
+          532
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          203,
+          533
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          8,
+          592,
+          347,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          164
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          358,
+          592,
+          652,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          142
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          648,
+          592,
+          962,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          147
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          960,
+          590,
+          1238,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          125
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1238,
+          592,
+          1518,
+          762
+        ],
+        "frames": 2,
+        "cuts": [
+          127
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            38,
+            826,
+            242,
+            998
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "clear": [
+          [
+            8,
+            778,
+            192,
+            840
+          ]
+        ]
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          253,
+          822,
+          712,
+          1002
+        ],
+        "frames": 2,
+        "cuts": [
+          242
+        ],
+        "clear": [
+          [
+            278,
+            778,
+            414,
+            840
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            783,
+            828,
+            952,
+            1002
+          ],
+          [
+            958,
+            822,
+            1242,
+            1002
+          ],
+          [
+            1248,
+            788,
+            1522,
+            1002
+          ]
+        ],
+        "main": false,
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            52,
+            60,
+            242,
+            252
+          ],
+          [
+            298,
+            60,
+            532,
+            252
+          ],
+          [
+            553,
+            60,
+            742,
+            252
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            328,
+            316,
+            557,
+            502
+          ],
+          [
+            598,
+            298,
+            952,
+            502
+          ],
+          [
+            598,
+            298,
+            952,
+            502
+          ]
+        ],
+        "main": false,
+        "phased": true
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            38,
+            576,
+            252,
+            748
+          ],
+          [
+            343,
+            553,
+            612,
+            750
+          ],
+          [
+            668,
+            513,
+            968,
+            758
+          ]
+        ],
+        "main": false
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            43,
+            823,
+            247,
+            1002
+          ],
+          [
+            298,
+            803,
+            532,
+            988
+          ],
+          [
+            608,
+            813,
+            1007,
+            1002
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            288,
+            758,
+            742,
+            814
+          ]
+        ]
+      },
+      "fx_bubble1": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            903,
+            92,
+            1017,
+            168
+          ]
+        ],
+        "main": false
+      },
+      "fx_bubble2": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1023,
+            98,
+            1137,
+            188
+          ]
+        ],
+        "main": false
+      },
+      "fx_bubble3": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1138,
+            98,
+            1262,
+            184
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1288,
+            52,
+            1512,
+            248
+          ]
+        ],
+        "main": false
+      },
+      "fx_smoke": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1028,
+            806,
+            1257,
+            988
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "mao": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      10,
+      0,
+      1530,
+      628
+    ],
+    "icon": [
+      22,
+      665,
+      375,
+      1005
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          28,
+          62,
+          527,
+          264
+        ],
+        "frames": 3,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          603,
+          62,
+          1502,
+          267
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          3,
+          334,
+          902,
+          502
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            33,
+            638,
+            152,
+            774
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            168,
+            593,
+            292,
+            757
+          ],
+          [
+            285,
+            556,
+            417,
+            764
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          428,
+          578,
+          1042,
+          772
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1058,
+          576,
+          1517,
+          772
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          13,
+          843,
+          442,
+          1007
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            483,
+            864,
+            632,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          903,
+          338,
+          1522,
+          507
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            708,
+            843,
+            867,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          893,
+          843,
+          1517,
+          1007
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          33,
+          60,
+          577,
+          250
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          177,
+          392
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          683,
+          38,
+          1462,
+          250
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          212,
+          562
+        ],
+        "clear": [
+          [
+            658,
+            0,
+            1037,
+            62
+          ]
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          38,
+          254,
+          622,
+          507
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          180,
+          344
+        ],
+        "clear": [
+          [
+            8,
+            260,
+            280,
+            322
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          698,
+          333,
+          1497,
+          507
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          182,
+          542
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          6,
+          583,
+          337,
+          742
+        ],
+        "frames": 2,
+        "cuts": [
+          162
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          338,
+          583,
+          642,
+          742
+        ],
+        "frames": 2,
+        "cuts": [
+          147
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          643,
+          583,
+          952,
+          742
+        ],
+        "frames": 2,
+        "cuts": [
+          157
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          958,
+          558,
+          1237,
+          742
+        ],
+        "frames": 2,
+        "cuts": [
+          122
+        ],
+        "clear": [
+          [
+            948,
+            533,
+            1122,
+            582
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1236,
+          583,
+          1527,
+          747
+        ],
+        "frames": 2,
+        "cuts": [
+          134
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            28,
+            808,
+            217,
+            1002
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "clear": [
+          [
+            8,
+            758,
+            192,
+            814
+          ]
+        ]
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          268,
+          808,
+          727,
+          1002
+        ],
+        "frames": 2,
+        "cuts": [
+          212
+        ],
+        "clear": [
+          [
+            268,
+            758,
+            422,
+            816
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            763,
+            823,
+            947,
+            1007
+          ],
+          [
+            973,
+            768,
+            1177,
+            1007
+          ],
+          [
+            1178,
+            783,
+            1492,
+            1007
+          ]
+        ],
+        "main": false,
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            33,
+            78,
+            202,
+            257
+          ],
+          [
+            243,
+            78,
+            412,
+            257
+          ],
+          [
+            438,
+            53,
+            667,
+            257
+          ],
+          [
+            663,
+            83,
+            862,
+            264
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            38,
+            328,
+            207,
+            507
+          ],
+          [
+            233,
+            328,
+            442,
+            507
+          ],
+          [
+            423,
+            298,
+            882,
+            512
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            418,
+            278,
+            682,
+            332
+          ]
+        ]
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            43,
+            588,
+            197,
+            762
+          ],
+          [
+            238,
+            588,
+            447,
+            762
+          ],
+          [
+            453,
+            558,
+            967,
+            772
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            448,
+            528,
+            732,
+            582
+          ]
+        ]
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            13,
+            858,
+            182,
+            1007
+          ],
+          [
+            208,
+            848,
+            457,
+            1007
+          ],
+          [
+            483,
+            798,
+            957,
+            1012
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            478,
+            778,
+            720,
+            838
+          ]
+        ]
+      },
+      "fx_book": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1203,
+            83,
+            1342,
+            207
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1348,
+            60,
+            1517,
+            247
+          ]
+        ],
+        "main": false
+      },
+      "fx_soldier": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1058,
+            323,
+            1342,
+            507
+          ]
+        ],
+        "main": false
+      },
+      "fx_rally": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1008,
+            573,
+            1507,
+            772
+          ]
+        ],
+        "main": false
+      },
+      "fx_tractor": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1058,
+            808,
+            1427,
+            1012
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "netanyahu": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      10,
+      10,
+      1525,
+      632
+    ],
+    "icon": [
+      18,
+      648,
+      355,
+      1002
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          28,
+          62,
+          612,
+          257
+        ],
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          688,
+          62,
+          1512,
+          257
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          23,
+          328,
+          842,
+          502
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            16,
+            630,
+            142,
+            760
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            158,
+            583,
+            287,
+            760
+          ],
+          [
+            318,
+            558,
+            422,
+            717
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          493,
+          545,
+          1067,
+          760
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false,
+        "clear": [
+          [
+            458,
+            518,
+            792,
+            578
+          ]
+        ]
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1093,
+          568,
+          1517,
+          770
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true,
+        "clear": [
+          [
+            1088,
+            518,
+            1275,
+            576
+          ]
+        ]
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          13,
+          838,
+          492,
+          1007
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            523,
+            868,
+            667,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          853,
+          333,
+          1522,
+          502
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            743,
+            838,
+            902,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          958,
+          848,
+          1527,
+          1007
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          28,
+          58,
+          602,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          162,
+          332
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          628,
+          43,
+          1502,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          202,
+          657
+        ],
+        "clear": [
+          [
+            618,
+            0,
+            1007,
+            60
+          ]
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          28,
+          256,
+          612,
+          530
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          177,
+          352
+        ],
+        "clear": [
+          [
+            6,
+            273,
+            264,
+            330
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          633,
+          328,
+          1502,
+          527
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          202,
+          642
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          8,
+          586,
+          337,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          162
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          343,
+          586,
+          642,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          127
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          643,
+          586,
+          937,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          147
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          948,
+          576,
+          1232,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          122
+        ],
+        "clear": [
+          [
+            958,
+            538,
+            1107,
+            586
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1238,
+          586,
+          1527,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          137
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            23,
+            823,
+            232,
+            1002
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "clear": [
+          [
+            18,
+            776,
+            172,
+            824
+          ]
+        ]
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          268,
+          806,
+          667,
+          1007
+        ],
+        "frames": 2,
+        "cuts": [
+          192
+        ],
+        "clear": [
+          [
+            268,
+            773,
+            394,
+            824
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            666,
+            823,
+            937,
+            1007
+          ],
+          [
+            958,
+            813,
+            1237,
+            1007
+          ],
+          [
+            1238,
+            803,
+            1512,
+            1007
+          ]
+        ],
+        "main": false,
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            28,
+            60,
+            207,
+            262
+          ],
+          [
+            228,
+            56,
+            507,
+            262
+          ],
+          [
+            510,
+            60,
+            712,
+            264
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            28,
+            328,
+            202,
+            507
+          ],
+          [
+            233,
+            328,
+            422,
+            507
+          ],
+          [
+            438,
+            328,
+            652,
+            507
+          ]
+        ],
+        "main": false
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            23,
+            570,
+            197,
+            752
+          ],
+          [
+            223,
+            570,
+            487,
+            752
+          ]
+        ],
+        "main": false
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            18,
+            823,
+            207,
+            1007
+          ],
+          [
+            203,
+            828,
+            492,
+            1007
+          ],
+          [
+            498,
+            813,
+            692,
+            1007
+          ]
+        ],
+        "main": false
+      },
+      "fx_dome": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1033,
+            93,
+            1292,
+            262
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1328,
+            60,
+            1507,
+            250
+          ]
+        ],
+        "main": false
+      },
+      "fx_drone": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1028,
+            353,
+            1302,
+            447
+          ]
+        ],
+        "main": false
+      },
+      "fx_missile": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1258,
+            368,
+            1527,
+            457
+          ]
+        ],
+        "main": false
+      },
+      "fx_jet": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1023,
+            573,
+            1312,
+            697
+          ]
+        ],
+        "main": false
+      },
+      "fx_usflag": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1303,
+            568,
+            1527,
+            737
+          ]
+        ],
+        "main": false
+      },
+      "fx_wall": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1063,
+            793,
+            1507,
+            1012
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "praud": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      12,
+      12,
+      1524,
+      570
+    ],
+    "icon": [
+      18,
+      590,
+      428,
+      1002
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          62,
+          62,
+          622,
+          254
+        ],
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          693,
+          62,
+          1502,
+          254
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          8,
+          336,
+          857,
+          500
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            23,
+            610,
+            162,
+            754
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            148,
+            570,
+            297,
+            754
+          ],
+          [
+            298,
+            548,
+            442,
+            767
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          448,
+          572,
+          1047,
+          757
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1058,
+          573,
+          1512,
+          752
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          13,
+          834,
+          472,
+          1002
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            513,
+            866,
+            652,
+            1002
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          868,
+          336,
+          1532,
+          497
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            738,
+            836,
+            872,
+            1002
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          898,
+          834,
+          1527,
+          1007
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          53,
+          58,
+          667,
+          252
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          182,
+          382
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          698,
+          46,
+          1507,
+          252
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          187,
+          635
+        ],
+        "clear": [
+          [
+            678,
+            0,
+            1070,
+            62
+          ]
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          23,
+          260,
+          642,
+          514
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          172,
+          432
+        ],
+        "clear": [
+          [
+            8,
+            258,
+            286,
+            320
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          733,
+          316,
+          1472,
+          522
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          167,
+          552
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          10,
+          583,
+          322,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          155
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          333,
+          588,
+          622,
+          742
+        ],
+        "frames": 2,
+        "cuts": [
+          137
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          623,
+          588,
+          917,
+          737
+        ],
+        "frames": 2,
+        "cuts": [
+          147
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          923,
+          578,
+          1217,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          142
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1218,
+          583,
+          1522,
+          757
+        ],
+        "frames": 2,
+        "cuts": [
+          147
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            23,
+            826,
+            222,
+            1002
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "clear": [
+          [
+            8,
+            778,
+            207,
+            832
+          ]
+        ]
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          298,
+          826,
+          712,
+          1002
+        ],
+        "frames": 2,
+        "cuts": [
+          222
+        ],
+        "clear": [
+          [
+            283,
+            778,
+            474,
+            834
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            778,
+            826,
+            932,
+            1007
+          ],
+          [
+            953,
+            826,
+            1122,
+            1007
+          ],
+          [
+            1148,
+            788,
+            1522,
+            1007
+          ]
+        ],
+        "main": false,
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            33,
+            60,
+            237,
+            254
+          ],
+          [
+            268,
+            60,
+            477,
+            254
+          ],
+          [
+            518,
+            60,
+            722,
+            254
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            43,
+            323,
+            232,
+            502
+          ],
+          [
+            238,
+            323,
+            557,
+            502
+          ],
+          [
+            583,
+            323,
+            1012,
+            502
+          ]
+        ],
+        "main": false
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            43,
+            578,
+            227,
+            757
+          ],
+          [
+            278,
+            588,
+            567,
+            762
+          ],
+          [
+            623,
+            533,
+            947,
+            757
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            598,
+            513,
+            674,
+            574
+          ]
+        ]
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            38,
+            828,
+            267,
+            1002
+          ],
+          [
+            298,
+            828,
+            602,
+            1002
+          ],
+          [
+            638,
+            803,
+            1152,
+            1012
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            628,
+            776,
+            670,
+            834
+          ]
+        ]
+      },
+      "fx_chyron": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            723,
+            83,
+            967,
+            242
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1276,
+            60,
+            1507,
+            247
+          ]
+        ],
+        "main": false
+      },
+      "fx_reporter": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1043,
+            333,
+            1257,
+            502
+          ]
+        ],
+        "main": false
+      },
+      "fx_camera": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1278,
+            333,
+            1502,
+            502
+          ]
+        ],
+        "main": false
+      },
+      "fx_chart": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1113,
+            553,
+            1432,
+            752
+          ]
+        ],
+        "main": false
+      },
+      "fx_stop": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1193,
+            818,
+            1482,
+            992
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "mbappe": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      20,
+      0,
+      1520,
+      632
+    ],
+    "icon": [
+      72,
+      660,
+      375,
+      990
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          30,
+          66,
+          592,
+          262
+        ],
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          620,
+          66,
+          1478,
+          262
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          8,
+          338,
+          882,
+          502
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            38,
+            628,
+            162,
+            772
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            170,
+            596,
+            302,
+            760
+          ],
+          [
+            303,
+            560,
+            437,
+            732
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          445,
+          582,
+          1012,
+          768
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1050,
+          583,
+          1508,
+          768
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          15,
+          838,
+          458,
+          1008
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            478,
+            866,
+            622,
+            1008
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          895,
+          338,
+          1508,
+          502
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            712,
+            836,
+            882,
+            1008
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          898,
+          838,
+          1515,
+          1008
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          40,
+          62,
+          672,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          200,
+          375
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          750,
+          58,
+          1508,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          240,
+          570
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          35,
+          262,
+          712,
+          514
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          193,
+          443
+        ],
+        "clear": [
+          [
+            10,
+            272,
+            288,
+            334
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          748,
+          335,
+          1508,
+          514
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          194,
+          584
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          8,
+          586,
+          328,
+          750
+        ],
+        "frames": 2,
+        "cuts": [
+          152
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          343,
+          586,
+          642,
+          750
+        ],
+        "frames": 2,
+        "cuts": [
+          127
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          645,
+          586,
+          938,
+          750
+        ],
+        "frames": 2,
+        "cuts": [
+          145
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          948,
+          570,
+          1228,
+          750
+        ],
+        "frames": 2,
+        "cuts": [
+          127
+        ],
+        "clear": [
+          [
+            940,
+            538,
+            1128,
+            589
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1230,
+          586,
+          1528,
+          750
+        ],
+        "frames": 2,
+        "cuts": [
+          130
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            38,
+            828,
+            252,
+            1002
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          338,
+          812,
+          792,
+          1002
+        ],
+        "frames": 2,
+        "cuts": [
+          192
+        ],
+        "clear": [
+          [
+            330,
+            770,
+            502,
+            832
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            858,
+            830,
+            1018,
+            1012
+          ],
+          [
+            1038,
+            822,
+            1218,
+            1012
+          ],
+          [
+            1222,
+            778,
+            1508,
+            1012
+          ]
+        ],
+        "main": false,
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            52,
+            62,
+            232,
+            252
+          ],
+          [
+            298,
+            62,
+            518,
+            252
+          ],
+          [
+            562,
+            56,
+            800,
+            252
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            52,
+            318,
+            218,
+            502
+          ],
+          [
+            272,
+            318,
+            548,
+            502
+          ],
+          [
+            552,
+            318,
+            802,
+            502
+          ]
+        ],
+        "main": false
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            62,
+            578,
+            258,
+            752
+          ],
+          [
+            352,
+            562,
+            582,
+            752
+          ],
+          [
+            642,
+            505,
+            968,
+            758
+          ]
+        ],
+        "main": false
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            28,
+            822,
+            282,
+            1002
+          ],
+          [
+            318,
+            822,
+            612,
+            1002
+          ],
+          [
+            648,
+            806,
+            1008,
+            1002
+          ]
+        ],
+        "main": false
+      },
+      "fx_ball": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            452,
+            195,
+            509,
+            251
+          ]
+        ],
+        "main": true
+      },
+      "fx_expulse": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1222,
+            322,
+            1508,
+            482
+          ]
+        ],
+        "main": false
+      },
+      "fx_trophy": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1112,
+            548,
+            1348,
+            745
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1272,
+            60,
+            1508,
+            250
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "bardella": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      15,
+      40,
+      1520,
+      660
+    ],
+    "icon": [
+      18,
+      672,
+      350,
+      1006
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          38,
+          62,
+          527,
+          267
+        ],
+        "frames": 3,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          603,
+          62,
+          1502,
+          267
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          6,
+          336,
+          897,
+          507
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            33,
+            636,
+            142,
+            777
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            168,
+            596,
+            292,
+            760
+          ],
+          [
+            298,
+            556,
+            417,
+            760
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          448,
+          576,
+          1052,
+          757
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1066,
+          576,
+          1507,
+          777
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          13,
+          853,
+          447,
+          1007
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            488,
+            866,
+            614,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          918,
+          338,
+          1517,
+          507
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            716,
+            843,
+            864,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          898,
+          848,
+          1517,
+          1007
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          43,
+          60,
+          602,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          152,
+          332
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          668,
+          38,
+          1492,
+          254
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          237,
+          607
+        ],
+        "clear": [
+          [
+            643,
+            0,
+            1042,
+            58
+          ]
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          38,
+          274,
+          612,
+          524
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          187,
+          342
+        ],
+        "clear": [
+          [
+            18,
+            270,
+            274,
+            327
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          673,
+          333,
+          1477,
+          524
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          207,
+          592
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          8,
+          586,
+          332,
+          747
+        ],
+        "frames": 2,
+        "cuts": [
+          157
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          343,
+          586,
+          642,
+          747
+        ],
+        "frames": 2,
+        "cuts": [
+          142
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          643,
+          586,
+          957,
+          747
+        ],
+        "frames": 2,
+        "cuts": [
+          152
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          958,
+          581,
+          1227,
+          747
+        ],
+        "frames": 2,
+        "cuts": [
+          117
+        ],
+        "clear": [
+          [
+            953,
+            536,
+            1124,
+            587
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1243,
+          586,
+          1527,
+          754
+        ],
+        "frames": 2,
+        "cuts": [
+          122
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            33,
+            826,
+            217,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "clear": [
+          [
+            18,
+            773,
+            187,
+            832
+          ]
+        ]
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          273,
+          813,
+          692,
+          1007
+        ],
+        "frames": 2,
+        "cuts": [
+          197
+        ],
+        "clear": [
+          [
+            288,
+            768,
+            432,
+            820
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            698,
+            820,
+            967,
+            1007
+          ],
+          [
+            983,
+            803,
+            1197,
+            1007
+          ],
+          [
+            1208,
+            798,
+            1452,
+            1007
+          ]
+        ],
+        "main": false,
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            38,
+            56,
+            237,
+            274
+          ],
+          [
+            263,
+            56,
+            477,
+            274
+          ],
+          [
+            503,
+            56,
+            752,
+            274
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            38,
+            328,
+            187,
+            507
+          ],
+          [
+            203,
+            328,
+            427,
+            507
+          ],
+          [
+            413,
+            288,
+            997,
+            507
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            403,
+            278,
+            507,
+            330
+          ]
+        ]
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            38,
+            598,
+            157,
+            787
+          ],
+          [
+            228,
+            573,
+            437,
+            787
+          ],
+          [
+            448,
+            568,
+            667,
+            792
+          ],
+          [
+            698,
+            518,
+            1092,
+            802
+          ]
+        ],
+        "main": false
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            43,
+            843,
+            242,
+            1007
+          ],
+          [
+            303,
+            843,
+            517,
+            1007
+          ],
+          [
+            603,
+            823,
+            897,
+            1007
+          ]
+        ],
+        "main": false
+      },
+      "fx_sound": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            688,
+            33,
+            957,
+            267
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1253,
+            38,
+            1507,
+            264
+          ]
+        ],
+        "main": false
+      },
+      "fx_meeting": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1013,
+            316,
+            1502,
+            507
+          ]
+        ],
+        "main": false
+      },
+      "fx_euflag": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            993,
+            828,
+            1477,
+            1002
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "melenchon": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      0,
+      0,
+      1536,
+      612
+    ],
+    "icon": [
+      40,
+      628,
+      430,
+      1008
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          40,
+          66,
+          535,
+          262
+        ],
+        "frames": 3,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          600,
+          66,
+          1500,
+          262
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          5,
+          335,
+          905,
+          505
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            35,
+            630,
+            150,
+            775
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            165,
+            595,
+            292,
+            758
+          ],
+          [
+            292,
+            556,
+            415,
+            752
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          430,
+          579,
+          1050,
+          772
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1060,
+          579,
+          1510,
+          772
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          15,
+          846,
+          450,
+          1012
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            490,
+            846,
+            640,
+            1012
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          905,
+          340,
+          1520,
+          505
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            700,
+            846,
+            880,
+            1012
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          895,
+          846,
+          1515,
+          1012
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          40,
+          64,
+          700,
+          250
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          210,
+          460
+        ]
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          770,
+          64,
+          1505,
+          250
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          220,
+          548
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          20,
+          270,
+          680,
+          530
+        ],
+        "frames": 3,
+        "phased": true,
+        "clear": [
+          [
+            15,
+            265,
+            284,
+            334
+          ]
+        ],
+        "cuts": [
+          230,
+          490
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          765,
+          333,
+          1515,
+          530
+        ],
+        "frames": 3,
+        "phased": true,
+        "cuts": [
+          190,
+          520
+        ]
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          12,
+          595,
+          350,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          168
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          360,
+          595,
+          650,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          140
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          655,
+          595,
+          945,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          140
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          950,
+          568,
+          1245,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          145
+        ],
+        "clear": [
+          [
+            945,
+            545,
+            1102,
+            594
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1255,
+          595,
+          1530,
+          752
+        ],
+        "frames": 2,
+        "cuts": [
+          125
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            20,
+            835,
+            230,
+            1000
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          285,
+          815,
+          710,
+          1000
+        ],
+        "frames": 2,
+        "cuts": [
+          220
+        ],
+        "clear": [
+          [
+            285,
+            780,
+            412,
+            836
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          750,
+          800,
+          1470,
+          1022
+        ],
+        "frames": 3,
+        "cuts": [
+          235,
+          485
+        ],
+        "clear": [
+          [
+            740,
+            780,
+            968,
+            837
+          ]
+        ],
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            75,
+            62,
+            275,
+            255
+          ],
+          [
+            355,
+            62,
+            560,
+            255
+          ],
+          [
+            625,
+            58,
+            930,
+            255
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            75,
+            318,
+            255,
+            505
+          ],
+          [
+            280,
+            318,
+            505,
+            505
+          ],
+          [
+            520,
+            320,
+            955,
+            505
+          ]
+        ],
+        "main": false
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            45,
+            580,
+            225,
+            755
+          ],
+          [
+            320,
+            566,
+            545,
+            755
+          ],
+          [
+            610,
+            522,
+            935,
+            755
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            600,
+            515,
+            705,
+            568
+          ]
+        ]
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            70,
+            825,
+            250,
+            1005
+          ],
+          [
+            285,
+            825,
+            525,
+            1005
+          ],
+          [
+            625,
+            775,
+            1120,
+            1005
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            600,
+            770,
+            640,
+            822
+          ]
+        ]
+      },
+      "fx_sound": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1030,
+            58,
+            1225,
+            250
+          ]
+        ],
+        "main": false
+      },
+      "fx_shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1295,
+            60,
+            1505,
+            258
+          ]
+        ],
+        "main": false
+      },
+      "fx_crowd": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1010,
+            322,
+            1495,
+            500
+          ]
+        ],
+        "main": false
+      },
+      "fx_sign": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1240,
+            810,
+            1455,
+            1005
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "hitler": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      12,
+      518,
+      385,
+      880
+    ],
+    "icon": [
+      12,
+      518,
+      385,
+      880
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "hiTolerance": 12,
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          28,
+          62,
+          620,
+          262
+        ],
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          668,
+          62,
+          1508,
+          262
+        ],
+        "frames": 6,
+        "fps": 10,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          18,
+          332,
+          832,
+          502
+        ],
+        "frames": 6,
+        "fps": 14,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            18,
+            622,
+            152,
+            760
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            152,
+            583,
+            302,
+            767
+          ],
+          [
+            312,
+            552,
+            432,
+            727
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          493,
+          556,
+          1062,
+          767
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false,
+        "clear": [
+          [
+            448,
+            525,
+            770,
+            578
+          ]
+        ]
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1083,
+          566,
+          1517,
+          780
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true,
+        "clear": [
+          [
+            1078,
+            525,
+            1252,
+            578
+          ]
+        ]
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          18,
+          836,
+          462,
+          1007
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            498,
+            866,
+            632,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          853,
+          333,
+          1517,
+          502
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            718,
+            838,
+            872,
+            1007
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          898,
+          840,
+          1517,
+          1012
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            28,
+            62,
+            172,
+            248
+          ],
+          [
+            200,
+            62,
+            348,
+            248
+          ],
+          [
+            350,
+            62,
+            562,
+            248
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "phased": true
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            768,
+            40,
+            900,
+            250
+          ],
+          [
+            905,
+            58,
+            1340,
+            250
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "phased": true
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            25,
+            330,
+            165,
+            505
+          ],
+          [
+            195,
+            315,
+            345,
+            505
+          ],
+          [
+            362,
+            262,
+            562,
+            505
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "phased": true
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            600,
+            335,
+            765,
+            505
+          ],
+          [
+            770,
+            340,
+            1292,
+            505
+          ],
+          [
+            1295,
+            330,
+            1482,
+            505
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "phased": true
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          5,
+          568,
+          302,
+          722
+        ],
+        "frames": 2,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "cuts": [
+          150
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          343,
+          570,
+          612,
+          728
+        ],
+        "frames": 2,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "cuts": [
+          125
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          640,
+          570,
+          915,
+          728
+        ],
+        "frames": 2,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "cuts": [
+          145
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          935,
+          565,
+          1202,
+          728
+        ],
+        "frames": 2,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "cuts": [
+          120
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          1220,
+          578,
+          1492,
+          732
+        ],
+        "frames": 2,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "cuts": [
+          140
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            28,
+            795,
+            215,
+            1002
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "loop": true
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rect": [
+          258,
+          785,
+          610,
+          1002
+        ],
+        "frames": 2,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "cuts": [
+          195
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            958,
+            785,
+            1190,
+            1005
+          ],
+          [
+            1290,
+            790,
+            1482,
+            1005
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "fps": 3,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            338,
+            70,
+            452,
+            232
+          ],
+          [
+            518,
+            70,
+            700,
+            232
+          ],
+          [
+            758,
+            62,
+            905,
+            232
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ]
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            318,
+            265,
+            462,
+            410
+          ],
+          [
+            493,
+            280,
+            738,
+            410
+          ],
+          [
+            803,
+            235,
+            1097,
+            408
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "phased": true
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            293,
+            462,
+            467,
+            612
+          ],
+          [
+            508,
+            468,
+            692,
+            612
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ]
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            318,
+            840,
+            437,
+            1002
+          ],
+          [
+            463,
+            825,
+            597,
+            1002
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ]
+      },
+      "fx_waves": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            915,
+            40,
+            1247,
+            215
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ]
+      },
+      "fx_tower": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            680,
+            428,
+            1107,
+            612
+          ]
+        ],
+        "main": false,
+        "bg": [
+          62,
+          32,
+          34
+        ]
+      },
+      "fx_plane": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            968,
+            810,
+            1097,
+            870
+          ]
+        ],
+        "main": true,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "strong": 999
+      },
+      "fx_bomb": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            952,
+            878,
+            1008,
+            937
+          ]
+        ],
+        "main": true,
+        "bg": [
+          62,
+          32,
+          34
+        ],
+        "strong": 999
+      }
+    },
+    "strong": 110
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "fightclub", "runtimeExecutable": "npm", "runtimeArgs": ["start"], "port": 3000 },
+    { "name": "fightclub-test", "runtimeExecutable": "node", "runtimeArgs": ["server.js"], "port": 3001, "env": { "PORT": "3001" } }
+  ]
+}

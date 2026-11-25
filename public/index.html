@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#040816">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FightClub">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <title>FightClub · Bureau de vote</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/controller.css">
+</head>
+<body>
+  <section id="view-join" class="view active">
+    <header class="ticker">
+      <span class="live">EN DIRECT</span>
+      <div class="ticker-track"><span class="ticker-text" id="ticker-text"></span></div>
+    </header>
+    <div class="join-head">
+      <h1 class="logo">Fight <span>Club</span></h1>
+      <p class="banner" style="--c: var(--rouge)">Édition présidentielle</p>
+    </div>
+    <form id="join-form" class="frame join-card" autocomplete="off">
+      <p class="banner">Rejoindre le débat</p>
+      <label>
+        <span class="field-label">N° du bureau de vote</span>
+        <input id="code" maxlength="4" autocapitalize="characters" spellcheck="false" placeholder="ABCD" required>
+      </label>
+      <label>
+        <span class="field-label">Nom du candidat</span>
+        <input id="name" maxlength="12" placeholder="Ton pseudo" required>
+      </label>
+      <button type="submit" class="btn">Se présenter</button>
+      <p id="join-error" class="error" role="alert"></p>
+    </form>
+  </section>
+
+  <section id="view-lobby" class="view">
+    <div class="lobby-col poster-col">
+      <div class="poster-art">
+        <img id="portrait" class="portrait" alt="">
+        <canvas id="preview" width="200" height="200"></canvas>
+        <span id="slot-tag" class="slot-tag">P?</span>
+        <span id="lobby-name" class="lobby-name"></span>
+      </div>
+      <h2 id="char-name" class="char-name">—</h2>
+      <p id="char-class" class="char-class"></p>
+      <p id="char-slogan" class="char-slogan"></p>
+      <p id="char-desc" class="char-desc"></p>
+      <dl id="char-stats" class="stats"></dl>
+    </div>
+    <div class="lobby-col">
+      <span class="banner pick-label" style="--c: var(--or-dark)">Choisis ton candidat</span>
+      <div id="char-grid" class="char-grid"></div>
+      <dl id="char-specials" class="specials"></dl>
+      <button id="ready" class="btn big">Déposer ma candidature</button>
+      <button type="button" id="open-settings" class="link-btn">⚙ Réglages de la manette</button>
+      <p id="lobby-status" class="status"></p>
+    </div>
+  </section>
+
+  <section id="view-pad" class="view">
+    <div id="hit-flash" class="hit-flash"></div>
+    <div class="stick-hint" id="stick-hint">Pose ton pouce ici</div>
+    <div id="stick-base" class="stick-base">
+      <svg class="stick-gate" viewBox="-60 -60 120 120" aria-hidden="true">
+        <circle class="gate-ring" r="54"></circle>
+        <circle class="gate-inner" r="22"></circle>
+        <g class="gate-notches">
+          <path d="M0 -58 L0 -49"></path><path d="M0 -58 L0 -49" transform="rotate(45)"></path>
+          <path d="M0 -58 L0 -49" transform="rotate(90)"></path><path d="M0 -58 L0 -49" transform="rotate(135)"></path>
+          <path d="M0 -58 L0 -49" transform="rotate(180)"></path><path d="M0 -58 L0 -49" transform="rotate(225)"></path>
+          <path d="M0 -58 L0 -49" transform="rotate(270)"></path><path d="M0 -58 L0 -49" transform="rotate(315)"></path>
+        </g>
+        <path id="stick-sector" class="gate-sector" d="M0 0 L-22.2 -53.6 A58 58 0 0 1 22.2 -53.6 Z"></path>
+      </svg>
+      <div id="stick-knob" class="stick-knob"><i></i></div>
+    </div>
+
+    <div class="pad-hud">
+      <img id="hud-icon" class="hud-icon" alt="">
+      <span id="hud-tag" class="slot-tag">P1</span>
+      <span class="hud-label">Impopularité</span>
+      <span id="hud-percent" class="hud-percent">0%</span>
+      <span id="hud-stocks" class="hud-stocks"></span>
+    </div>
+    <div id="pad-gear" class="pad-gear" aria-label="Réglages">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.7 7.7 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-1.7-1L15 3.5h-4L10.6 6a7.5 7.5 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.7 7.7 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.5 7.5 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
+    </div>
+
+    <div class="pbtn attack" data-k="a">
+      <span class="cap">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l3 8 8-3-4 8 7 3-8 3 3 8-8-4-3 7-3-7-8 4 3-8-8-3 7-3-4-8 8 3z"/></svg>
+        <b>ATTAQUE</b><small>coup bas</small>
+      </span>
+    </div>
+    <div class="pbtn special" data-k="b">
+      <span class="cap">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19 2L6 18h8l-3 12 15-18h-9z"/></svg>
+        <b>SPÉCIAL</b><small>49.3</small>
+      </span>
+    </div>
+    <div class="pbtn jump" data-k="j">
+      <span class="cap">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l11 11h-7v4h-8v-4H5zM12 22h8v3h-8zM12 27h8v2h-8z"/></svg>
+        <b>SAUT</b><small>volte-face</small>
+      </span>
+    </div>
+    <div class="pbtn shield" data-k="s">
+      <span class="cap">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l12 4v9c0 8-5.4 13-12 15C9.4 28 4 23 4 15V6z"/></svg>
+        <b>BOUCLIER</b>
+      </span>
+    </div>
+    <div id="cd-pips" class="cd-pips" aria-label="Recharge des spéciaux">
+      <i data-k="neutralB" class="ready"><b>B</b></i>
+      <i data-k="sideB" class="ready"><b>⇆</b></i>
+      <i data-k="upB" class="ready" hidden><b>↑</b></i>
+      <i data-k="downB" class="ready"><b>↓</b></i>
+    </div>
+
+    <div class="rotate">
+      <div class="rotate-icon">↻</div>
+      <p>Tourne ton téléphone<br>en mode paysage</p>
+    </div>
+  </section>
+
+  <section id="view-results" class="view">
+    <p class="banner">Résultats du second tour</p>
+    <h1 id="result-title" class="result-title">ÉLU !</h1>
+    <p id="result-sub" class="status"></p>
+    <button id="continue" class="btn big">Nouvelle élection</button>
+  </section>
+
+  <div id="settings" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="frame sheet-card">
+      <p class="banner" id="settings-title">Réglages de la manette</p>
+      <label class="row-toggle"><span><b>Vibrations</b><small>à chaque appui et quand tu prends un coup</small></span><input type="checkbox" id="opt-haptics"><i class="sw"></i></label>
+      <div class="row-test"><button type="button" id="test-haptics" class="link-btn">Tester la vibration</button><small id="haptic-note"></small></div>
+      <label class="row-toggle"><span><b>Clic sonore</b><small>petit « clic » sous le pouce (utile sur iPhone)</small></span><input type="checkbox" id="opt-click"><i class="sw"></i></label>
+      <label class="row-toggle"><span><b>Saut au joystick</b><small>pousser vers le haut fait sauter</small></span><input type="checkbox" id="tapjump"><i class="sw"></i></label>
+      <div class="row-seg"><b>Taille des boutons</b>
+        <div class="seg" data-opt="size"><button type="button" data-v="s">Petite</button><button type="button" data-v="m">Normale</button><button type="button" data-v="l">Grande</button></div>
+      </div>
+      <div class="row-seg"><b>Main des boutons</b>
+        <div class="seg" data-opt="hand"><button type="button" data-v="r">Droite</button><button type="button" data-v="l">Gauche</button></div>
+      </div>
+      <button type="button" id="settings-close" class="btn">C’est réglé</button>
+    </div>
+  </div>
+
+  <div id="banner" class="notice hidden"></div>
+
+  <script type="module" src="/js/controller.js"></script>
+</body>
+</html>
