@@ -15,6 +15,8 @@ export const SHIELD_MAX = 50;
 const GROUND_STATES = new Set(['idle', 'run', 'crouch', 'land', 'jumpsquat']);
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+// À cheval : animation montée qui remplace chaque animation à pied (les autres -> m_idle)
+const MOUNT_ANIM = { walk: 'm_walk', run: 'm_run', dash: 'm_run', jump: 'm_jump', jump2: 'm_jump2', fall: 'm_fall', helpless: 'm_fall', land: 'm_land', jumpsquat: 'm_land', hurt: 'm_hurt', tumble: 'm_hurt' };
 
 export class Fighter {
   constructor(game, player, char, slot) {
@@ -49,11 +51,15 @@ export class Fighter {
     const sp = game.stage.spawns[slot];
     this.reset(sp.x, sp.y);
     this.facing = sp.x < 240 ? 1 : -1;
+    this.bagIdx = 0; // Sac sans fond : on commence toujours par le premier objet
     this.grounded = true;
     this.ground = game.stage.solids[0];
   }
 
   reset(x, y) {
+    this.setMount(false, true);
+    this.mark = null;
+    this.charmT = 0;
     this.x = x; this.y = y; this.vx = 0; this.vy = 0;
     this.state = 'idle'; this.stateTime = 0; this.animTick = 0;
     this.move = null; this.moveName = null; this.moveFrame = 0; this.moveAir = false; this.slamT = 0;
@@ -63,6 +69,31 @@ export class Fighter {
     this.airdodgeUsed = false; this.sideBUsed = false; this.jump2T = 0; this.landLag = 0; this.tumbleRot = 0; this.dodgeDir = 0;
     this.cd = { neutralB: 0, sideB: 0, upB: 0, downB: 0 }; // recharge des spéciaux, en frames
     this.combo = 0; this.comboTarget = null; this.comboFrame = -1e9; this.denyT = 0;
+  }
+
+  /** Monture (Napoléon) : autres stats, zone de contact plus grande et animations « m_ » tant qu'il est à cheval. */
+  setMount(on, quiet = false) {
+    const M = this.char.mount;
+    if (!M || !!this.mounted === on) return;
+    this.mounted = on;
+    if (on) {
+      this.baseStats = this.stats;
+      this.stats = { ...this.stats, ...M.stats };
+      this.horseHP = M.hp;
+      this.w = M.width;
+      this.h = M.height;
+      return;
+    }
+    this.stats = this.baseStats;
+    this.w = this.stats.width;
+    this.h = this.stats.height;
+    if (quiet) return;
+    this.cd.downB = M.cooldown; // le cheval ne revient pas tout de suite
+    this.game.onEvent({ type: 'cd', id: this.id, k: 'downB', ms: Math.round((M.cooldown * 1000) / 60) });
+    const g = this.game;
+    if (this.sprite.has('fx_mount')) g.fx.add({ type: 'sprite', fr: this.sprite.get('fx_mount', 0, null, 0.99), x: this.x, y: this.y - this.h * 0.5, h: this.h * 1.4, facing: 1, life: 24, center: true });
+    g.fx.puff(this.x, this.y - this.h * 0.4, '#f0e7d2');
+    g.sfx.whoosh();
   }
 
   setState(s) {
@@ -94,6 +125,10 @@ export class Fighter {
     this.prev = { x: inp.x, y: inp.y, a: inp.a, b: inp.b, j: inp.j, s: inp.s };
 
     if (this.flash > 0) this.flash--;
+    if (this.charmT > 0 && --this.charmT % 14 === 0) {
+      const sp = this.charmBy?.sprite;
+      if (sp?.has('fx_heart')) this.game.fx.add({ type: 'sprite', fr: sp.get('fx_heart'), x: this.x + (Math.random() - 0.5) * 10, y: this.y - this.h - 2, vy: -0.4, h: 5, facing: 1, life: 26, center: true });
+    }
     for (const k of SPECIALS) if (this.cd[k] > 0) this.cd[k]--;
     if (this.denyT > 0) this.denyT--;
     if (this.state === 'dead') {
@@ -267,10 +302,13 @@ export class Fighter {
 
   airAction() {
     const inp = this.in;
-    if (this.buf.j && this.jumpsLeft > 0) {
+    if (this.buf.j && (this.jumpsLeft > 0 || this.mounted)) {
       this.buf.j = 0;
-      this.jumpsLeft--;
-      this.vy = -this.stats.doubleJumpPower;
+      // À cheval sans saut restant : grand saut du cheval, qui disparaît ensuite
+      const leap = this.jumpsLeft <= 0;
+      if (leap) this.setMount(false);
+      else this.jumpsLeft--;
+      this.vy = -(leap ? this.char.mount.jumpPower : this.stats.doubleJumpPower);
       const home = this.homeDir();
       this.vx = inp.x * this.stats.airSpeed * (home && Math.sign(inp.x) === home ? 1.45 : 1); // saut de retour plus long
       this.fastFalling = false;
@@ -410,6 +448,11 @@ export class Fighter {
   startAttack() {
     const { x, y } = this.in;
     let name;
+    if (this.mounted) { // à cheval : toutes les attaques deviennent une charge de cavalerie
+      if (Math.abs(x) > 0.4) this.facing = Math.sign(x);
+      else if (this.grounded) this.faceFoe();
+      return this.startMove('cavalry');
+    }
     if (this.grounded && Math.abs(x) <= 0.4) this.faceFoe();
     if (this.grounded) {
       if (y < -0.5 && -y >= Math.abs(x) * 0.8) name = 'utilt';
@@ -444,6 +487,14 @@ export class Fighter {
       }
       return false;
     }
+    if (this.mounted) {
+      // Bas à cheval : on descend ; un autre spécial se fait à pied (le cheval s'en va)
+      if (name === 'downB') {
+        this.startMove('dismount');
+        return true;
+      }
+      this.setMount(false);
+    }
     if ((name === 'neutralB' || name === 'downB') && this.grounded) this.faceFoe();
     if (name === 'sideB') {
       if (!this.grounded && this.sideBUsed) return false;
@@ -451,10 +502,13 @@ export class Fighter {
       if (!this.grounded) this.sideBUsed = true;
     }
     if (this.fxs.anger) this.game.fx.anger(this.x, this.y - this.h - 4);
-    // Le nom du spécial s'affiche au-dessus de la tête
-    const label = this.char.specials?.[{ neutralB: 'neutral', sideB: 'side', upB: 'up', downB: 'down' }[name]];
+    // Sac sans fond : chaque appui sort l'objet suivant d'une séquence fixe
+    const bag = name === 'sideB' && this.char.bag ? this.char.bag[this.bagIdx] : null;
+    if (bag) this.bagIdx = (this.bagIdx + 1) % this.char.bag.length;
+    // Le nom du spécial (ou de l'objet sorti du sac) s'affiche au-dessus de la tête
+    const label = (bag && this.moves[bag].say) || this.char.specials?.[{ neutralB: 'neutral', sideB: 'side', upB: 'up', downB: 'down' }[name]];
     if (label) this.game.fx.callout(this.x, this.y - this.h - 10, label.toUpperCase(), this.color);
-    this.startMove(name);
+    this.startMove(bag || name);
     const cd = this.moves[name].cooldown;
     if (cd > 0) {
       this.cd[name] = cd;
@@ -488,7 +542,8 @@ export class Fighter {
     const active = f > m.startup && f <= m.startup + m.active;
 
     // Coup qui a touché : on peut l'annuler en saut ou en un autre coup pour enchaîner (combos)
-    if (this.landed && !m.kind && f > m.startup + m.active) {
+    // cancel : coup annulable dès sa 2e frame (riposte du contre → Décret enchaîné)
+    if ((this.landed || m.cancel) && !m.kind && f > (m.cancel ? 1 : m.startup + m.active)) {
       if (this.buf.j && (this.grounded || this.jumpsLeft > 0)) {
         this.move = null;
         if (this.grounded) {
@@ -514,7 +569,7 @@ export class Fighter {
     if (this.grounded) {
       if (m.kind === 'dash' && active) {
         // la charge garde sa vitesse
-      } else if (Math.abs(inp.x) > 0.25) {
+      } else if (Math.abs(inp.x) > 0.25 && !m.hold) { // hold : immobile pendant qu'il pilote son missile
         // On continue d'avancer en frappant (sans se retourner), un peu moins vite qu'en courant.
         const target = inp.x * this.stats.runSpeed * (m.kind ? 0.35 : 0.6);
         this.vx += clamp(target - this.vx, -this.stats.groundAccel, this.stats.groundAccel);
@@ -538,6 +593,15 @@ export class Fighter {
     // Élan vers l'avant au moment du coup (tacle glissé…)
     if (m.lunge && f === m.startup) this.vx = this.facing * m.lunge;
 
+    // Onde de choc autour du perso (Transformation de star) : effet seul, les zones de coup font les dégâts
+    if (m.shockwave && f === m.startup + 1) {
+      g.fx.shockwave(this.x, this.y - this.h * 0.45, this.y, m.shockwave);
+      g.shake(m.shockwave.shake ?? 7);
+    }
+
+    // Explosion devant soi (parfum…)
+    if (m.blastAt && f === m.startup + 1) g.blast(this, this.x + this.facing * m.blastAt.dx, this.y - this.h * m.blastAt.dy, m.blastAt);
+
     // Invocation qui accompagne un autre coup (avion de l'allié pendant la remontée…)
     if (m.summon && m.kind !== 'summon' && f === m.startup + 1) g.spawnSummon(this, m.summon);
 
@@ -545,8 +609,20 @@ export class Fighter {
       case 'projectile':
         // m.proj : second projectile du perso (ex. carton rouge en spécial bas)
         if (f === m.startup + 1) g.spawnProjectile(this, m.proj ? { ...DEFAULT_PROJECTILE, ...this.char[m.proj] } : this.proj);
+        // hold : on garde la pose tant que le missile téléguidé vole, puis on reprend la main
+        else if (m.hold && active && !g.projectiles.some((p) => p.owner === this && p.guided)) this.moveFrame = m.startup + m.active;
         break;
       case 'summon':
+        if (f === 1 && m.detonate) {
+          // detonate : si la charge est déjà posée, ce nouvel appui la fait exploser à distance
+          const c = g.projectiles.find((p) => p.owner === this && p.summonKey === m.summon && !p.dead);
+          if (c) {
+            c.dead = true;
+            g.blast(this, c.x, c.y, this.char[m.summon].blast);
+            this.moveFrame = m.startup + m.active;
+            break;
+          }
+        }
         if (f === m.startup + 1) g.spawnSummon(this, m.summon);
         break;
       case 'sneeze': // « Ah… ah… ATCHOUM ! » : un souffle qui balaie tout devant
@@ -558,11 +634,32 @@ export class Fighter {
           this.vx -= this.facing * 1.5; // le recul de l'éternuement
         }
         break;
+      case 'decoy': // Retouche express : un double reste sur place, elle file dans la direction choisie
+        if (f === 1) this.decoyDir = Math.sign(inp.x) || -this.facing;
+        if (f === m.startup) g.spawnDecoy(this);
+        if (active) {
+          this.vx = this.decoyDir * m.speed;
+          if (!this.grounded) this.vy = Math.min(this.vy, 0.4);
+          if (f % 2 === 0) g.fx.add({ type: 'ghost', x: this.x, y: this.y, fr: this.currentFrame(), facing: this.facing, life: 10, color: this.fxs.colors[0] });
+        } else if (f > m.startup) this.vx *= 0.8;
+        break;
+      case 'mount':
+        if (f === m.startup + 1) {
+          this.setMount(true);
+          g.fx.callout(this.x, this.y - this.h - 10, 'EN SELLE !', this.color);
+          g.sfx.jump(0.8);
+        }
+        break;
+      case 'dismount':
+        if (f === m.startup + 1) this.setMount(false);
+        break;
       case 'swap':
         if (f === 1) g.fx.puff(this.x, this.y - this.h / 2, this.fxs.colors[0]);
         if (f === m.startup + 1) g.swapWithFoe(this);
         break;
       case 'dash':
+        if (f === m.startup) this.dashX0 = this.x; // départ de la traînée (trail)
+        if (m.trail && f === m.startup + m.active) g.spawnTrail(this, this.dashX0 ?? this.x, m.trail);
         if (f <= m.startup) {
           this.vx *= 0.7;
           if (!this.grounded) this.vy = Math.min(this.vy, 0.6);
@@ -584,7 +681,7 @@ export class Fighter {
           this.fastFalling = false;
           if (Math.abs(inp.x) > 0.3) this.facing = Math.sign(inp.x);
           const home = this.homeDir();
-          this.vx = inp.x * (home && Math.sign(inp.x) === home ? 4.6 : 3.5); // remontée bien dirigeable vers l'arène
+          this.vx = inp.x * (home && Math.sign(inp.x) === home ? 4.6 : 3.5) * (m.drift ?? 1); // remontée dirigeable vers l'arène (drift < 1 : moins)
           g.fx.burst(this, this.fxs.trailUp);
           g.sfx.jump(1.8);
         } else if (f > m.startup) {
@@ -688,6 +785,7 @@ export class Fighter {
 
   ko() {
     if (this.state === 'dead') return;
+    this.mark = null;
     this.stocks--;
     this.record.falls++;
     const killer = this.lastHitBy && this.game.frame - this.lastHitTime < 600 ? this.lastHitBy : null;
@@ -751,7 +849,7 @@ export class Fighter {
 
     const prevY = this.y, prevTop = this.y - h;
 
-    this.x += this.vx;
+    this.x += this.vx * (this.charmT > 0 && this.state !== 'hurt' ? 0.65 : 1); // charmé : déplacements ralentis
     for (const s of stg.solids) {
       if (this.y > s.y + 0.01 && this.y - h < s.y + s.h && this.x + hw > s.x && this.x - hw < s.x + s.w) {
         this.x = this.x < s.x + s.w / 2 ? s.x - hw : s.x + s.w + hw;
@@ -942,7 +1040,8 @@ export class Fighter {
   }
 
   currentFrame() {
-    const [anim, phase, prog] = this.animInfo();
+    let [anim, phase, prog] = this.animInfo();
+    if (this.mounted && !anim.startsWith('m_') && anim !== 'dismount') anim = this.sprite.has(MOUNT_ANIM[anim]) ? MOUNT_ANIM[anim] : 'm_idle';
     return this.sprite.get(anim, this.animTick, phase ?? null, prog ?? null);
   }
 
@@ -967,7 +1066,33 @@ export class Fighter {
     else if (this.state === 'shieldbreak' && (frame >> 3) % 2) drawFrame(ctx, fr, 0, 0, '#ffe14d', 0.35);
     ctx.restore();
 
+    if (this.mark) this.drawMark(ctx, frame);
+    if (this.char.bag) this.drawNextItem(ctx, frame);
     if (this.state === 'shield') this.drawShield(ctx, frame);
+  }
+
+  /** Sac sans fond : petit objet suivant de la séquence, flottant derrière l'épaule. */
+  drawNextItem(ctx, frame) {
+    const img = this.moves[this.char.bag[this.bagIdx]]?.icon;
+    if (!img || !this.sprite.has(img) || this.state === 'dead' || this.state === 'respawn') return;
+    const fr = this.sprite.get(img), h = 7, w = (fr.sw / fr.sh) * h;
+    ctx.save();
+    ctx.globalAlpha = this.cd.sideB > 0 ? 0.35 : 0.9;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(fr.img, fr.sx, fr.sy, fr.sw, fr.sh, this.x - this.facing * 10 - w / 2, this.y - this.h - 2 - h + Math.sin(frame * 0.12), w, h);
+    ctx.restore();
+  }
+
+  /** Marque du Décret impérial au-dessus de la tête : une entaille de plus à chaque seconde écoulée. */
+  drawMark(ctx, frame) {
+    const M = this.mark, sp = M.by.sprite;
+    if (!sp.has('fx_mark')) return;
+    const fr = sp.get('fx_mark', 0, null, Math.min(0.99, 1 - (M.until - this.game.frame) / M.len));
+    const h = 14, w = (fr.sw / fr.sh) * h; // au-dessus de l'étiquette P1/P2
+    ctx.save();
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(fr.img, fr.sx, fr.sy, fr.sw, fr.sh, this.x - w / 2, this.y - this.h - 13 - h + Math.sin(frame * 0.15), w, h);
+    ctx.restore();
   }
 
   drawShield(ctx, frame) {

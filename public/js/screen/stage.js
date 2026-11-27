@@ -16,7 +16,7 @@ export const STAGE = {
     { x: 208, y: 98, w: 64, passable: true, baseY: 98, phase: 2.1, colors: ['#f2efe8', '#b9b4a8', '#ffffff'] },
     { x: 288, y: 142, w: 64, passable: true, baseY: 142, phase: 4.2, colors: ['#d8343b', '#93202a', '#ff8f8f'] },
   ],
-  blast: { left: -165, right: 645, top: -200, bottom: 370 }, // plafond haut : on survit plus longtemps aux coups vers le haut
+  blast: { left: -235, right: 715, top: -200, bottom: 370 }, // plafond haut : on survit plus longtemps aux coups vers le haut
   spawns: [{ x: 170, y: 190 }, { x: 310, y: 190 }],
   respawns: [{ x: 200, y: 46 }, { x: 280, y: 46 }],
   /** À appeler une fois par frame : fait monter et descendre les planches. */

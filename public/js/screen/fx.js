@@ -329,6 +329,20 @@ export class FX {
     this.add({ type: 'ring', x, y, life: 14, size: 1, grow: r / 14, color });
   }
 
+  /** Onde de choc (champ shockwave d'un coup) : flash, anneaux qui s'élargissent jusqu'à r, anneau aplati au sol, étincelles. */
+  shockwave(x, y, groundY, { r = 60, colors = ['#ff4fa3', '#ffffff'] } = {}) {
+    const [c0, c1] = colors;
+    this.add({ type: 'flash', x, y, life: 12, size: r * 0.9, color: c0 });
+    this.add({ type: 'flash', x, y, life: 8, size: r * 0.45, color: c1 });
+    for (let i = 0; i < 3; i++) {
+      const life = 16 + i * 5;
+      this.add({ type: 'ring', x, y, age: -i * 4, life, size: 4, grow: (r - 4) / life, color: i % 2 ? c1 : c0, width: 3 - i * 0.6 });
+      this.add({ type: 'ring', x, y: groundY, age: -i * 4, life, size: 4, grow: (r - 4) / life, sy: 0.22, color: i % 2 ? c1 : c0, width: 3 - i * 0.6 });
+    }
+    this.spark(x, y, 26, c0, 4.5);
+    this.spark(x, y, 14, c1, 3.5);
+  }
+
   koBlast(x, y, angle, color) {
     this.add({ type: 'beam', x, y, angle, life: 50, color });
     this.add({ type: 'flash', x, y, life: 10, size: 60, color });
@@ -502,9 +516,9 @@ export class FX {
         case 'ring':
           ctx.globalAlpha = k;
           ctx.strokeStyle = q.color;
-          ctx.lineWidth = Math.max(0.6, 2 * k);
+          ctx.lineWidth = Math.max(0.6, (q.width || 2) * k);
           ctx.beginPath();
-          ctx.arc(q.x, q.y, Math.max(0.5, q.size), 0, Math.PI * 2);
+          ctx.ellipse(q.x, q.y, Math.max(0.5, q.size), Math.max(0.5, q.size * (q.sy || 1)), 0, 0, Math.PI * 2); // sy : anneau aplati (au sol)
           ctx.stroke();
           break;
         case 'flash':

@@ -37,7 +37,7 @@ class Projectile {
     this.age = 0;
     this.dead = false;
     this.baseY = o.y;
-    this.hit = { dmg: o.dmg, base: o.base, growth: o.growth, angle: o.angle, stun: o.stun, callout: o.callout, calloutImg: o.calloutImg };
+    this.hit = { dmg: o.dmg, base: o.base, growth: o.growth, angle: o.angle, stun: o.stun, gaze: o.gaze, callout: o.callout, calloutImg: o.calloutImg, charm: o.charm };
   }
 
   rect() {
@@ -59,7 +59,28 @@ class Projectile {
     this.y = this.wobble ? this.baseY + Math.sin(this.age * 0.15) * this.wobble : this.baseY;
     if (--this.life <= 0) {
       this.dead = true;
-      if (this.kind === 'missile') game.fx.boom(this.x, this.y, 0.6);
+      if (this.kind === 'missile') this.puff ? game.fx.puff(this.x, this.y, this.color) : game.fx.boom(this.x, this.y, 0.6); // puff : boule de neige
+      if (this.fuse) game.blast(this.owner, this.x, this.y, this.fuse); // grenade : explose au bout de la mèche
+    }
+    if (this.kind === 'blast') return; // zone d'explosion : ne bouge pas, ne laisse pas de traînée
+    if (this.kind === 'decoy') { // double de Retouche express : reste sur place puis explose (ou s'efface)
+      if (this.dead) game.popDecoy(this, null);
+      return;
+    }
+    if (this.kind === 'cloud') {
+      // Nuage de poudre : dégâts progressifs (sans éjection) à qui reste dedans
+      if (this.age % this.tick === 0) {
+        for (const f of game.fighters) {
+          if (f === this.owner || f.state === 'dead' || f.invulnerable() || !overlap(this.rect(), f.hurtbox())) continue;
+          f.percent = Math.min(999, f.percent + this.dmg);
+          if (f.mark) f.mark.dmg += this.dmg;
+          f.flash = 6;
+          this.owner.record.dealt += this.dmg;
+          game.fx.spark(f.x, f.y - f.h / 2, 4, this.color, 1);
+          game.emitHud(f);
+        }
+      }
+      return;
     }
     if (this.summon && this.fly) {
       // Invocation volante (avion de chasse) : file droit à travers l'écran
@@ -79,7 +100,10 @@ class Projectile {
       this.y = this.baseY;
       if (this.y > game.stage.blast.bottom) this.dead = true;
       if (this.kind === 'battery') {
-        if (this.shots?.includes(this.age)) game.launchInterceptor(this);
+        if (this.shots?.includes(this.age)) {
+          game.launchInterceptor(this);
+          this.shotAt = this.age;
+        }
         return;
       }
       if (this.wall || !this.vx) return;
@@ -91,7 +115,8 @@ class Projectile {
       for (const s of [...game.stage.solids.slice(0, 1), ...game.stage.platforms]) {
         if (this.vy > 0 && this.x > s.x && this.x < s.x + s.w && this.baseY + this.size >= s.y && this.baseY + this.size - this.vy <= s.y + 1) {
           this.baseY = this.y = s.y - this.size;
-          this.vy = -Math.max(2.2, this.vy * this.bounce);
+          this.vy = -Math.max(this.fuse ? 1 : 2.2, this.vy * this.bounce);
+          if (this.fuse) this.vx *= 0.6; // la grenade ralentit à chaque rebond
           game.fx.dust(this.x, s.y, 0, 2);
         }
       }
@@ -120,15 +145,22 @@ class Projectile {
 
   /** Tête chercheuse : vire peu à peu vers l'adversaire le plus proche et accélère. */
   steer(game) {
-    let target = null, best = Infinity;
-    for (const f of game.fighters) {
-      if (f === this.owner || f.state === 'dead' || f.eliminated) continue;
-      const d = Math.hypot(f.x - this.x, f.y - f.h / 2 - this.y);
-      if (d < best) { best = d; target = f; }
-    }
     this.ang ??= Math.atan2(this.vy, this.vx);
-    if (target) {
-      const want = Math.atan2(target.y - target.h / 2 - this.y, target.x - this.x);
+    let want = null;
+    if (this.guided) {
+      // Téléguidé : suit le joystick tant que le lanceur tient la pose ; touché, il perd le contrôle et le missile file droit
+      const o = this.owner, { x, y } = o.in;
+      if (o.state === 'attack' && o.move?.hold && Math.hypot(x, y) > 0.3) want = Math.atan2(y, x);
+    } else {
+      let target = null, best = Infinity;
+      for (const f of game.fighters) {
+        if (f === this.owner || f.state === 'dead' || f.eliminated) continue;
+        const d = Math.hypot(f.x - this.x, f.y - f.h / 2 - this.y);
+        if (d < best) { best = d; target = f; }
+      }
+      if (target) want = Math.atan2(target.y - target.h / 2 - this.y, target.x - this.x);
+    }
+    if (want !== null) {
       let diff = want - this.ang;
       while (diff > Math.PI) diff -= Math.PI * 2;
       while (diff < -Math.PI) diff += Math.PI * 2;
@@ -155,6 +187,23 @@ class Projectile {
     const x = Math.round(this.x), y = Math.round(this.y), r = this.size;
     const d = Math.sign(this.vx) || 1;
     switch (this.kind) {
+      case 'blast': return; // l'explosion est dessinée par les effets
+      case 'decoy':
+        if (!this.fr) return;
+        ctx.save();
+        ctx.globalAlpha = Math.min(1, this.life / 15) * (0.75 + 0.15 * Math.sin(this.age * 0.3));
+        this.drawImage(ctx, 0, this.dir, true);
+        ctx.restore();
+        return;
+      case 'cloud': { // nuage qui gonfle, flotte puis s'efface
+        if (!this.fr) return;
+        ctx.save();
+        ctx.globalAlpha = Math.min(1, this.age / 6, this.life / 20) * 0.9;
+        this.y = this.baseY + Math.sin(this.age * 0.08) * 1.5;
+        this.drawImage(ctx, 0, this.dir || 1);
+        ctx.restore();
+        return;
+      }
       case 'summon': {
         if (this.fr && this.wall) { // le mur sort de terre puis s'efface
           const up = Math.min(1, this.age / 8);
@@ -237,8 +286,10 @@ class Projectile {
           ctx.save();
           ctx.globalAlpha = grow;
           ctx.translate(this.x, this.y + this.hh);
-          ctx.scale(grow, grow);
-          drawFrame(ctx, { ...this.fr, scale: this.k, ax: this.fr.sw / 2, ay: this.fr.sh });
+          ctx.scale(grow * (this.flip ? this.dir : 1), grow);
+          // fireFr : pose de tir affichée juste après chaque tir (sapin qui souffle)
+          const fr = this.fireFr && this.shotAt != null && this.age - this.shotAt < 14 ? this.fireFr : this.fr;
+          drawFrame(ctx, { ...fr, scale: this.k, ax: fr.sw / 2, ay: fr.sh });
           ctx.restore();
           return;
         }
@@ -533,7 +584,7 @@ export class Game {
     this.slowAcc = 0;
     this.paused = false;
     this.winner = null;
-    this.cam = { x: 240, y: 145, zoom: 1 };
+    this.cam = { x: 240, y: 165, zoom: 0.75 }; // cadre de base de updateCamera
     this.shakeAmt = 0;
     this.flashAmt = 0;
     this.hudShake = {};
@@ -571,7 +622,9 @@ export class Game {
     for (const f of this.fighters) f.update();
     for (const p of this.projectiles) p.update(this);
     this.checkHits();
+    for (const f of this.fighters) if (f.mark && this.frame >= f.mark.until) this.decree(f);
     this.pushWalls();
+    for (const p of [...this.projectiles]) if (p.dead && p.cloud) this.spawnCloud(p); // poudre : le nuage reste là où elle éclate
     this.projectiles = this.projectiles.filter((p) => !p.dead);
     this.fx.update();
     this.updateCamera();
@@ -596,6 +649,12 @@ export class Game {
       const boxes = a.activeHitboxes();
       if (!boxes) continue;
       for (const { hit, rect } of boxes) {
+        // un double (Retouche express) encaisse le coup à la place de sa propriétaire
+        const decoy = this.projectiles.find((q) => q.kind === 'decoy' && !q.dead && q.owner !== a && overlap(rect, q.rect()));
+        if (decoy) {
+          this.popDecoy(decoy, a);
+          continue;
+        }
         for (const t of fs) {
           if (t === a || t.invulnerable() || a.hitIds.has(t.id)) continue;
           if (overlap(rect, t.hurtbox())) {
@@ -607,11 +666,24 @@ export class Game {
     }
     for (const p of this.projectiles) {
       if (p.dead || p.delay > 0 || p.noHit) continue;
+      const decoy = !p.summon && this.projectiles.find((q) => q.kind === 'decoy' && !q.dead && q.owner !== p.owner && overlap(p.rect(), q.rect()));
+      if (decoy) {
+        this.popDecoy(decoy, null);
+        p.dead = true;
+        continue;
+      }
       for (const t of fs) {
         if (t === p.owner || t.invulnerable() || p.hitIds?.has(t.id)) continue;
         const r = p.rect();
         if (overlap(r, t.hurtbox())) {
           const blocked = this.applyHit(p.owner, t, p.hit, r, Math.sign(t.x - p.x) || Math.sign(p.vx) || 1, true);
+          if (blocked === 'counter') { // projectile renvoyé : il repart vers son lanceur
+            p.vx = -p.vx;
+            p.ang = Math.PI - (p.ang ?? 0);
+            p.owner = t;
+            p.hitIds?.clear();
+            break;
+          }
           const intercepted = blocked && t.fxs.intercept;
           if (intercepted) this.fx.intercept(p.x, p.y);
           if ((p.kind === 'missile' || p.boom) && !intercepted) this.fx.boom(p.x, p.y, 1);
@@ -665,11 +737,13 @@ export class Game {
   }
 
   applyHit(a, t, hit, rect, dir, isProj) {
-    const dmg = hit.dmg * a.stats.power;
+    const dmg = hit.dmg * a.stats.power * (t.mounted ? t.char.mount.armor : 1); // à cheval : dégâts réduits
     const px = (rect.x + rect.w / 2 + t.x) / 2;
     const py = (rect.y + rect.h / 2 + t.y - t.h / 2) / 2;
+    const tm = t.state === 'attack' && t.move;
+    if (!hit.sure && tm?.kind === 'counter' && t.moveFrame > tm.startup && t.moveFrame <= tm.startup + tm.active) return this.counter(t, a, isProj, hit, rect, dir);
 
-    if (t.state === 'shield') {
+    if (t.state === 'shield' && !hit.sure) {
       t.shieldHP -= dmg * 1.4;
       t.shieldStun = Math.round(3 + dmg * 0.5);
       t.vx = dir * Math.min(3, 0.6 + dmg * 0.15);
@@ -685,8 +759,28 @@ export class Game {
       return true;
     }
 
+    if (hit.mark) {
+      // Décret impérial : aucun dégât, la cible est marquée ; ce qu'elle encaisse ensuite sera infligé une seconde fois
+      if (!t.mark) {
+        t.mark = { by: a, until: this.frame + hit.mark, len: hit.mark, dmg: 0 };
+        this.fx.callout(t.x, t.y - t.h - 10, 'DÉCRET !', '#d6a83e');
+      }
+      t.flash = 6;
+      t.hitlag = 6;
+      if (!isProj) {
+        a.hitlag = 6;
+        a.landed = true;
+      }
+      this.fx.spark(px, py, 10, '#d6a83e', 2);
+      this.sfx.hit(2);
+      return false;
+    }
+
     t.percent = Math.min(999, t.percent + dmg);
-    if (hit.stun) {
+    if (t.mark) t.mark.dmg += dmg;
+    if (t.mounted && (t.horseHP -= dmg) <= 0) t.setMount(false); // trop de coups : le cheval s'enfuit
+    // gaze : n'étourdit que la cible tournée vers le lanceur ; de dos, coup normal
+    if (hit.stun && (!hit.gaze || t.facing === (Math.sign(a.x - t.x) || t.facing))) {
       // Carton rouge : pas d'éjection, mais l'adversaire reste sonné un long moment
       t.takeHit(0, 0, 1, a);
       t.hitstun = hit.stun;
@@ -705,9 +799,16 @@ export class Game {
     const s = (hit.base + t.percent * hit.growth) * (100 / t.stats.weight);
     const ang = (hit.angle * Math.PI) / 180;
     t.takeHit(Math.cos(ang) * s * dir, -Math.sin(ang) * s, s, a);
+    if (hit.charm) { // Bisou fatal : la cible, charmée, se déplace moins vite un moment
+      t.charmT = hit.charm;
+      t.charmBy = a;
+      this.fx.callout(t.x, t.y - t.h - 10, 'CHARMÉ !', '#ff4fa3');
+    }
     a.comboTarget = t;
     a.comboFrame = this.frame;
     if (!isProj) {
+      // hitImg : image de la planche qui éclate sur la cible (saisie de la Dissolution…)
+      if (a.move?.hitImg && a.sprite.has(a.move.hitImg)) this.fx.add({ type: 'sprite', fr: a.sprite.get(a.move.hitImg), x: t.x, y: t.y - t.h, h: t.h * 1.6, facing: 1, life: 32, center: true });
       a.landed = true;
       if (!a.grounded) {
         // Coup aérien qui touche : on flotte un instant et on récupère un saut pour poursuivre
@@ -776,7 +877,8 @@ export class Game {
       this.projectiles.push(new Projectile(o, {
         kind: 'battery', summon: true, summonKey: key, noHit: true, dir, x: o.x + dir * 16, y: g.y - 6, vx: 0, vy: 0, gravity: 0,
         life: c.life, size: 4, hw: 12, hh: 6, ground: g, color: o.fxs.colors[0], shots: c.shots, missile: c.missile,
-        fr, k: fr ? (c.imgHeight || 30) / fr.sh : 1,
+        fr, k: fr ? (c.imgHeight || 30) / fr.sh : 1, flip: !!c.flip,
+        fireFr: c.fireImg && o.sprite.has(c.fireImg) ? o.sprite.get(c.fireImg) : null,
       }));
       this.shake(3);
       this.sfx.land();
@@ -793,7 +895,8 @@ export class Game {
       this.projectiles.push(new Projectile(o, {
         kind: c.kind || 'summon', summon: true, summonKey: key, pierce: true, hitIds: new Set(), fr, k,
         x, y, vx: dir * (c.speed || 0), vy: 0, gravity: 0, life: c.life, size: 4, hw: w * (c.wall ? 0.45 : 0.4), hh: h / 2, ground: c.fly ? null : g,
-        fly: !!c.fly, wall: !!c.wall, drops: c.drops, noHit: !!c.noHit, // noHit : l'avion ne frappe pas, ses bombes oui noFlip: !!c.noFlip, // noFlip : image avec texte ou drapeaux, jamais en miroir
+        fly: !!c.fly, wall: !!c.wall, drops: c.drops, noHit: !!c.noHit, // noHit : l'avion ne frappe pas, ses bombes oui
+        noFlip: !!c.noFlip, // noFlip : image avec texte ou drapeaux, jamais en miroir
         dmg: c.dmg, base: c.base, growth: c.growth, angle: c.angle, stun: c.stun, callout: c.callout,
         color: o.fxs.colors[0], rainbow: c.rainbow && i === 0, delay: i * (c.delayGap ?? 8),
       }));
@@ -848,6 +951,120 @@ export class Game {
     this.sfx.whoosh();
   }
 
+  /** Nuage persistant laissé par un projectile (p.cloud) ; un seul par lanceur, le précédent disparaît. */
+  spawnCloud(p) {
+    const c = p.cloud, o = p.owner;
+    for (const q of this.projectiles) if (q.owner === o && q.kind === 'cloud') q.dead = true;
+    const fr = c.img && o.sprite.has(c.img) ? o.sprite.get(c.img) : null;
+    this.projectiles.push(new Projectile(o, {
+      kind: 'cloud', noHit: true, x: p.x, y: p.y, vx: 0, vy: 0, gravity: 0, life: c.life, size: c.r, tick: c.tick, dmg: c.dmg,
+      fr, k: fr ? c.imgHeight / fr.sh : 1, color: p.color,
+    }));
+    this.fx.puff(p.x, p.y, p.color);
+  }
+
+  /** Traînée laissée par une ruée (champ trail du coup) : couvre le trajet, blesse sans éjecter puis s'efface. */
+  spawnTrail(o, x0, c) {
+    for (const q of this.projectiles) if (q.owner === o && q.trail) q.dead = true;
+    const fr = c.img && o.sprite.has(c.img) ? o.sprite.get(c.img) : null;
+    const hw = Math.max(8, Math.abs(o.x - x0) / 2);
+    this.projectiles.push(new Projectile(o, {
+      kind: 'cloud', trail: true, noHit: true, x: (o.x + x0) / 2, y: o.y - (c.dy ?? 6), vx: 0, vy: 0, gravity: 0, life: c.life,
+      size: c.hh ?? 6, hw, hh: c.hh ?? 6, tick: c.tick, dmg: c.dmg, dir: Math.sign(o.x - x0) || o.facing,
+      fr, k: fr ? (hw * 2) / fr.sw : 1, color: o.fxs.colors[0],
+    }));
+  }
+
+  /** Contre (Gilet jaune) : le coup est annulé, l'attaquant est retourné et le contreur lui fait face. */
+  counter(t, a, isProj, hit, rect, dir) {
+    const mv = t.move;
+    if (mv.stun && !isProj) {
+      // Contre impérial : on pare et l'attaquant reste étourdi (mv.stun frames), sans dégâts
+      t.facing = Math.sign(a.x - t.x) || t.facing;
+      t.startMove('riposte');
+      this.fx.add({ type: 'flash', x: (t.x + a.x) / 2, y: t.y - t.h * 0.6, life: 8, size: 22, color: '#ffe08a' });
+      this.applyHit(t, a, { dmg: 0, stun: mv.stun, callout: 'ÉTOURDI !', sure: true }, rect, -dir, false);
+      return 'counter';
+    }
+    if (!isProj) {
+      a.facing = -a.facing;
+      a.vx = -a.vx * 0.5;
+      a.hitlag = 10;
+    }
+    t.facing = Math.sign(a.x - t.x) || t.facing;
+    t.hitlag = 6;
+    const img = t.move.counterImg;
+    if (img && t.sprite.has(img)) this.fx.add({ type: 'sprite', fr: t.sprite.get(img), x: t.x + t.facing * 10, y: t.y - t.h * 0.55, h: t.h * 0.9, facing: t.facing, life: 22, center: true });
+    this.fx.callout(t.x, t.y - t.h - 10, 'RETOURNÉ !', t.color);
+    this.sfx.shield();
+    return 'counter';
+  }
+
+  /** Retouche express : double laissé sur place, qui encaisse un coup à la place de sa propriétaire. */
+  spawnDecoy(o) {
+    for (const q of this.projectiles) if (q.owner === o && q.kind === 'decoy') q.dead = true;
+    const fr = o.sprite.has('fx_decoy') ? o.sprite.get('fx_decoy') : null;
+    this.projectiles.push(new Projectile(o, {
+      kind: 'decoy', noHit: true, x: o.x, y: o.y - o.h / 2, vx: 0, vy: 0, gravity: 0, life: o.moves.downB?.life ?? 150, size: 4,
+      hw: o.w / 2 + 1, hh: o.h / 2, dir: o.facing, fr, k: fr?.scale ?? 1, boom: o.moves.downB?.boom,
+    }));
+  }
+
+  /** Le double est frappé (ou arrive en fin de vie) : il explose — ou, sans boom, disparaît en figeant l'attaquant. */
+  popDecoy(d, a) {
+    d.dead = true;
+    if (d.boom) {
+      if (a) {
+        a.hitlag = 10; // reste dans l'explosion
+        this.fx.callout(a.x, a.y - a.h - 10, 'PIÉGÉ !', '#ff4fa3');
+      }
+      this.blast(d.owner, d.x, d.y + d.hh * 0.3, d.boom);
+      return;
+    }
+    const sp = d.owner.sprite;
+    if (sp.has('fx_poof')) this.fx.add({ type: 'sprite', fr: sp.get('fx_poof'), x: d.x, y: d.y, h: d.hh * 2.4, facing: 1, life: 24, center: true });
+    else this.fx.puff(d.x, d.y, '#ff8fc8');
+    if (a) {
+      a.hitlag = 30;
+      this.fx.callout(a.x, a.y - a.h - 10, 'RATÉ !', '#ff4fa3');
+    }
+    this.sfx.whoosh();
+  }
+
+  /** Fin du Décret impérial : les dégâts reçus pendant la marque sont infligés une seconde fois, en une explosion. */
+  decree(t) {
+    const M = t.mark;
+    t.mark = null;
+    if (t.state === 'dead' || t.state === 'respawn') return;
+    const sp = M.by.sprite, y = t.y - t.h / 2;
+    if (sp.has('fx_mark')) this.fx.add({ type: 'sprite', fr: sp.get('fx_mark', 0, null, 0.99), x: t.x, y, h: t.h * 1.4, facing: 1, life: 26, center: true });
+    if (M.dmg < 1) {
+      this.fx.puff(t.x, y, '#d6a83e');
+      return;
+    }
+    // seulement des % en plus, sans éjection
+    t.percent = Math.min(999, t.percent + M.dmg);
+    M.by.record.dealt += M.dmg;
+    t.flash = 10;
+    this.fx.boom(t.x, y, 0.8 + Math.min(0.8, M.dmg / 50));
+    this.fx.callout(t.x, t.y - t.h - 12, `DÉCRET ×2 : +${Math.round(M.dmg)} %`, '#d6a83e');
+    this.sfx.hit(4);
+    this.hudShake[t.id] = 12;
+    this.emitHud(t);
+  }
+
+  /** Explosion (grenade, charge) : zone de coup de rayon b.r pendant quelques frames, image de la planche si dispo. */
+  blast(o, x, y, b) {
+    this.projectiles.push(new Projectile(o, {
+      kind: 'blast', x, y, vx: 0, vy: 0, gravity: 0, life: 5, size: b.r, pierce: true, hitIds: new Set(),
+      dmg: b.dmg, base: b.base, growth: b.growth, angle: b.angle,
+    }));
+    if (b.img && o.sprite.has(b.img)) this.fx.add({ type: 'sprite', fr: o.sprite.get(b.img), x, y: y - b.imgHeight * 0.35, h: b.imgHeight, facing: 1, life: 30, center: true });
+    else this.fx.boom(x, y, 1.2);
+    this.shake(6);
+    this.sfx.hit(9);
+  }
+
   /** Bombe larguée par un bombardier : tombe, explose au sol ou sur l'adversaire. */
   dropBomb(b) {
     const d = b.drops, sp = b.owner.sprite;
@@ -863,7 +1080,9 @@ export class Game {
     const d = b.dir, m = b.missile, sp = b.owner.sprite;
     const fr = m.img && sp.has(m.img) ? sp.get(m.img) : null; // intercepteur dessiné sur la planche
     this.projectiles.push(new Projectile(b.owner, {
-      ...m, kind: 'missile', fr, k: fr ? m.imgHeight / fr.sh : 1, x: b.x + d * 6, y: b.y - 14, vx: 0, vy: 0, ang: -Math.PI / 2 + d * 0.45,
+      // launch : angle de départ (0 = droit devant) ; sans lui, l'intercepteur part vers le haut
+      ...m, kind: 'missile', fr, k: fr ? m.imgHeight / fr.sh : 1, x: b.x + d * (m.dx ?? 6), y: b.y - (m.dy ?? 14), vx: 0, vy: 0,
+      ang: m.launch != null ? (d > 0 ? -m.launch : Math.PI + m.launch) : -Math.PI / 2 + d * 0.45,
     }));
     this.fx.smoke(b.x + d * 6, b.y - 10, '#d9d4cc');
     this.fx.add({ type: 'flash', x: b.x + d * 8, y: b.y - 14, life: 6, size: 10, color: '#ffb347' });
@@ -917,23 +1136,34 @@ export class Game {
   }
 
   updateCamera() {
-    let pts = this.fighters.filter((f) => f.state !== 'dead');
-    if (this.phase === 'gameover' && this.winner && this.winner.state !== 'dead') pts = [this.winner];
-    if (!pts.length) return;
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const f of pts) {
-      const x = clamp(f.x, -110, 590), y = clamp(f.y - f.h / 2, -130, 300);
-      minX = Math.min(minX, x); maxX = Math.max(maxX, x);
-      minY = Math.min(minY, y); maxY = Math.max(maxY, y);
+    // Caméra fixe, centrée sur l'arène : elle ne suit personne. Vue large qui montre les bords et le dessous de la nacelle ;
+    // elle dézoome encore (sans se décaler sur le côté) quand un perso sort de ce cadre. Gros plan sur le vainqueur en fin de partie.
+    const w = this.phase === 'gameover' && this.winner && this.winner.state !== 'dead' ? this.winner : null;
+    let cx = 240, cy, zoom;
+    if (w) {
+      cx = clamp(w.x, -110, 590) * 0.75 + 60;
+      cy = (clamp(w.y - w.h / 2, -130, 300) - 8) * 0.7 + 45;
+      zoom = 1.8;
+    } else {
+      const b = this.stage.blast;
+      let half = 320, top = -15, bottom = 345; // cadre de base : x -80…560, y -15…345
+      for (const f of this.fighters) {
+        if (f.state === 'dead' || f.state === 'respawn') continue;
+        half = Math.max(half, Math.abs(f.x - 240) + 40);
+        top = Math.min(top, f.y - f.h - 25);
+        bottom = Math.max(bottom, f.y + 25);
+      }
+      half = Math.min(half, b.right - 240);
+      top = Math.max(top, b.top);
+      bottom = Math.min(bottom, b.bottom);
+      zoom = Math.min(240 / half, 270 / (bottom - top));
+      cy = bottom - 135 / zoom; // le bas reste calé : un combo vers le haut agrandit la vue par le haut
     }
-    const zoomMax = this.phase === 'gameover' ? 1.8 : 1.6;
-    const zoom = clamp(Math.min(480 / (maxX - minX + 150), 270 / (maxY - minY + 120)), 0.68, zoomMax);
-    const cx = ((minX + maxX) / 2) * 0.75 + 240 * 0.25;
-    const cy = ((minY + maxY) / 2 - 8) * 0.7 + 150 * 0.3;
     const c = this.cam;
+    const k = zoom < c.zoom ? 0.1 : 0.04; // dézoome vite, revient en douceur
     c.x += (cx - c.x) * 0.07;
-    c.y += (cy - c.y) * 0.07;
-    c.zoom += (zoom - c.zoom) * 0.04;
+    c.y += (cy - c.y) * k;
+    c.zoom += (zoom - c.zoom) * k;
   }
 
   // ------------------------------------------------------------ rendu

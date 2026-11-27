@@ -420,14 +420,92 @@ function extractHi(img, mask, fg, hz) {
   return anchored(out, w, h);
 }
 
-/** Ancrage : bas de la silhouette, centré sur les jambes (quart inférieur). */
+/**
+ * Éclats : petit morceau détaché qui touche le bord de la frame = bout de la pose voisine ramassé par la marge
+ * de découpe (main, chaussure, coin de titre, effet coupé net). On l'efface.
+ */
+function dropEdgeSlivers(out, w, h) {
+  const n = w * h, lab = new Int32Array(n).fill(-1), comps = [];
+  let total = 0;
+  for (let i = 0; i < n; i++) if (out[i * 4 + 3] > 40) total++;
+  for (let i = 0; i < n; i++) {
+    if (lab[i] >= 0 || out[i * 4 + 3] <= 40) continue;
+    const id = comps.length, px = [i], st = [i];
+    let edge = 0;
+    lab[i] = id;
+    while (st.length) {
+      const p = st.pop(), x = p % w, y = (p / w) | 0;
+      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) edge++;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const xx = x + dx, yy = y + dy, q = yy * w + xx;
+        if (xx < 0 || yy < 0 || xx >= w || yy >= h || lab[q] >= 0 || out[q * 4 + 3] <= 40) continue;
+        lab[q] = id;
+        st.push(q);
+        px.push(q);
+      }
+    }
+    comps.push({ px, edge });
+  }
+  // coupé net par le cadre (beaucoup de pixels sur la bordure) : jusqu'à 8 % ; sinon simple contact : 1,5 %
+  for (const c of comps) if ((c.edge >= 12 && c.px.length < total * 0.08) || (c.edge && c.px.length < total * 0.015)) for (const p of c.px) out[p * 4 + 3] = 0;
+}
+
+/**
+ * Ancrage : bas du perso, centré sur ses jambes (quart inférieur). Calculé sur le « noyau » du perso :
+ * pixels opaques, érodés pour retirer les effets fins (traînées, arcs, éclairs), dont on garde le plus
+ * gros morceau (sans débris, poussière ni fantôme détachés). Sinon le perso sautait de côté ou flottait
+ * dès qu'un effet dépassait sous ses pieds.
+ */
 function anchored(out, w, h) {
-  let bottom = h - 1;
-  while (bottom > 0 && !rowHas(out, w, bottom)) bottom--;
+  dropEdgeSlivers(out, w, h);
+  const n = w * h, R = Math.max(2, Math.round(h * 0.02)); // ≈ 8 px pour une pose de 400 px
+  const solid = new Uint8Array(n);
+  for (let i = 0; i < n; i++) solid[i] = out[i * 4 + 3] > 200 ? 1 : 0;
+  // érosion carrée de rayon R (somme glissante, séparable)
+  const erodeLine = (src, dst, len, count, stride, step) => {
+    for (let l = 0; l < count; l++) {
+      const o = l * stride;
+      let run = 0;
+      for (let k = 0; k < len + R; k++) {
+        if (k < len) run += src[o + k * step];
+        if (k - 2 * R - 1 >= 0) run -= src[o + (k - 2 * R - 1) * step];
+        const c = k - R;
+        if (c >= 0 && c < len) dst[o + c * step] = run === 2 * R + 1 ? 1 : 0;
+      }
+    }
+  };
+  const tmp = new Uint8Array(n), core = new Uint8Array(n);
+  erodeLine(solid, tmp, w, h, w, 1);
+  erodeLine(tmp, core, h, w, 1, w);
+  // plus gros morceau du noyau
+  const lab = new Int32Array(n).fill(-1);
+  let best = -1, bestN = 0;
+  for (let i = 0, id = 0; i < n; i++) {
+    if (!core[i] || lab[i] >= 0) continue;
+    const st = [i];
+    lab[i] = id;
+    let cnt = 0;
+    while (st.length) {
+      const p = st.pop(), x = p % w;
+      cnt++;
+      for (const q of [p - 1, p + 1, p - w, p + w]) {
+        if (q < 0 || q >= n || lab[q] >= 0 || !core[q] || Math.abs((q % w) - x) > 1) continue;
+        lab[q] = id;
+        st.push(q);
+      }
+    }
+    if (cnt > bestN) { bestN = cnt; best = id; }
+    id++;
+  }
+  const inCore = best >= 0 ? (i) => lab[i] === best : (i) => out[i * 4 + 3] > 128; // pose trop fine : ancien calcul
+  let bottom = -1, top = h;
+  for (let i = 0; i < n; i++) if (inCore(i)) { const y = (i / w) | 0; if (y > bottom) bottom = y; if (y < top) top = y; }
+  if (bottom < 0) bottom = h - 1, top = 0;
   const xs = [];
-  for (let y = Math.floor(bottom * 0.75); y <= bottom; y++) for (let x = 0; x < w; x++) if (out[(y * w + x) * 4 + 3] > 128) xs.push(x);
+  const from = Math.floor(bottom - (bottom - top) * 0.25);
+  for (let y = from; y <= bottom; y++) for (let x = 0; x < w; x++) if (inCore(y * w + x)) xs.push(x);
   xs.sort((p, q) => p - q);
-  return { data: out, w, h, ax: xs.length ? xs[xs.length >> 1] : w >> 1, ay: bottom };
+  return { data: out, w, h, ax: xs.length ? xs[xs.length >> 1] : w >> 1, ay: Math.min(h - 1, bottom + (best >= 0 ? R : 0)) };
 }
 
 const hz_keep = (fg, i) => fg.keep[i];
@@ -558,9 +636,23 @@ function clearSaturated(fg, zone, [zx, zy], rects) {
   for (const p of drop) fg[p] = 0;
 }
 
-/** Efface des rectangles de la planche (titres de section) dans le masque d'une zone. */
+function inPoly(px, py, pts) {
+  let inside = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const [xi, yi] = pts[i], [xj, yj] = pts[j];
+    if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+/** Efface des rectangles (ou polygones) de la planche (titres de section) dans le masque d'une zone. */
 function clearZones(fg, zone, [zx, zy], rects) {
-  for (const [x0, y0, x1, y1] of rects) {
+  for (const c of rects) {
+    if (Array.isArray(c[0])) { // polygone [[x, y], …] (coordonnées de planche) : pour séparer deux poses qui se touchent
+      for (let y = 0; y < zone.h; y++) for (let x = 0; x < zone.w; x++) if (inPoly(x + zx + 0.5, y + zy + 0.5, c)) fg[y * zone.w + x] = 0;
+      continue;
+    }
+    const [x0, y0, x1, y1] = c;
     for (let y = Math.max(0, y0 - zy); y < Math.min(zone.h, y1 - zy); y++) {
       for (let x = Math.max(0, x0 - zx); x < Math.min(zone.w, x1 - zx); x++) fg[y * zone.w + x] = 0;
     }
@@ -801,14 +893,27 @@ function keepTouching(fg, w, h) {
 }
 
 /** Garde le plus gros morceau (le perso) et ce qui le touche presque (mains, pieds, petit effet collé). */
-function keepMain(fg, w, h) {
+function keepMain(fg, w, h, tight = 0) {
   const comps = components(fg, w, h);
   if (!comps.length) return fg;
   const main = comps.reduce((a, b) => (b.pixels.length > a.pixels.length ? b : a));
   const out = new Uint8Array(fg.length);
+  // tight : on ne garde que les morceaux à moins de N px du perso lui-même (pas de sa boîte) — écarte les bouts de pose voisine
+  let near = null;
+  if (tight) {
+    near = new Uint8Array(fg.length);
+    for (const p of main.pixels) {
+      const x = p % w, y = (p / w) | 0;
+      for (let dy = -tight; dy <= tight; dy++) for (let dx = -tight; dx <= tight; dx++) {
+        const nx = x + dx, ny = y + dy;
+        if (nx >= 0 && ny >= 0 && nx < w && ny < h) near[ny * w + nx] = 1;
+      }
+    }
+  }
   for (const c of comps) {
     const gap = Math.max(c.x0 - main.x1, main.x0 - c.x1, c.y0 - main.y1, main.y0 - c.y1);
-    if (c === main || gap <= 2) for (const p of c.pixels) out[p] = 1;
+    const keep = c === main || (near ? c.pixels.some((p) => near[p]) : gap <= 2);
+    if (keep) for (const p of c.pixels) out[p] = 1;
   }
   return out;
 }
@@ -828,7 +933,24 @@ function removeFloorLines(fg, w, h) {
   for (const p of drop) fg[p] = 0;
 }
 
-async function importCharacter(id, cfg) {
+/**
+ * unmatte : effet resté collé à son fond (planche opaque) : l'alpha suit l'écart à la couleur du fond
+ * et la couleur est « dé-mélangée », comme pour les halos. Réservé aux images d'effet seules.
+ */
+function unmatte(f, [br, bg, bb]) {
+  const d = f.data, base = [br, bg, bb];
+  for (let i = 0; i < d.length; i += 4) {
+    const e = Math.hypot(d[i] - br, d[i + 1] - bg, d[i + 2] - bb);
+    const a = Math.pow(Math.max(0, Math.min(1, (e - 10) / 85)), 0.85);
+    if (a <= 0.02) { d[i + 3] = 0; continue; }
+    for (let k = 0; k < 3; k++) d[i + k] = Math.max(0, Math.min(255, base[k] + (d[i + k] - base[k]) / Math.max(a, 0.35)));
+    d[i + 3] = Math.min(d[i + 3], Math.round(a * 255));
+  }
+  return f;
+}
+
+/** onlyAnims : redécoupe seulement ces animations ; les autres gardent leurs images actuelles (atlas existant). */
+async function importCharacter(id, cfg, onlyAnims = null) {
   TOL = cfg.tolerance ?? BG_TOLERANCE;
   GROW = cfg.grow ?? true;
   STEP = cfg.step ?? 7;
@@ -845,23 +967,43 @@ async function importCharacter(id, cfg) {
   const all = [];
   const anims = {};
   const report = [];
+  let old = null;
+  if (onlyAnims) {
+    const def0 = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/characters', id, 'character.json'), 'utf8'));
+    old = { def: def0, ...(await sharp(fs.readFileSync(path.join(ROOT, 'public/characters', id, def0.sprite.atlas))).ensureAlpha().raw().toBuffer({ resolveWithObject: true })) };
+  }
   for (const [name, a] of Object.entries(cfg.animations)) {
+    const kept = old && !onlyAnims.includes(name) && old.def.sprite.animations[name];
+    if (kept) {
+      const frames = kept.frames.map(([x, y, w, h]) => {
+        const buf = Buffer.alloc(w * h * 4);
+        for (let r = 0; r < h; r++) old.data.copy(buf, r * w * 4, ((y + r) * old.info.width + x) * 4, ((y + r) * old.info.width + x + w) * 4);
+        return anchored(buf, w, h);
+      });
+      report.push(`${name}:=${frames.length}`);
+      all.push(...frames);
+      anims[name] = { frames, fps: a.fps, loop: a.loop, phased: a.phased, scale: a.scale };
+      continue;
+    }
     const sheet = await sheetOf(a.sheet);
     BG = a.bg ?? cfg.bg ?? null;
     STRONG = a.strong ?? cfg.strong ?? 48;
     if (a.rects) {
       // Une pose par rectangle : on ne garde que le perso (les bulles et effets voisins sont ignorés)
       const frames = [];
-      for (const r of a.rects) {
+      // une pose peut être { "r": [x0, y0, x1, y1], "clear": [[…]] } : zones à effacer pour elle seule (pose voisine collée)
+      for (const r0 of a.rects) {
+        const r = r0.r || r0;
         const zone = crop(sheet, r);
         const hz = await hiZone(sheetPath(a.sheet), r, `${id}_${a.sheet || 'planche'}`, a.alphaFloor);
-        const fg = foregroundHi(zone, hz, a.clear || [], r, []);
-        const mask = a.main !== false ? keepMain(fg, zone.w, zone.h) : fg;
-        frames.push(extractHi(zone, mask, fg, hz));
+        const fg = foregroundHi(zone, hz, [...(a.clear || []), ...(r0.clear || [])], r, []);
+        const mask = a.main !== false ? keepMain(fg, zone.w, zone.h, a.tight ?? cfg.tight ?? 0) : fg;
+        const fr = extractHi(zone, mask, fg, hz);
+        frames.push(a.unmatte ? unmatte(fr, a.unmatte) : fr);
       }
       report.push(`${name}:${frames.length}`);
       all.push(...frames);
-      anims[name] = { frames, fps: a.fps, loop: a.loop, phased: a.phased };
+      anims[name] = { frames, fps: a.fps, loop: a.loop, phased: a.phased, scale: a.scale };
       continue;
     }
     const zone = crop(sheet, a.rect);
@@ -874,10 +1016,13 @@ async function importCharacter(id, cfg) {
     if (a.main === true) masks = masks.map((m) => keepMain(m, zone.w, zone.h)); // détails détachés (nuages de la pose voisine) retirés
     if (a.main === 'touch') masks = masks.map((m) => keepTouching(m, zone.w, zone.h)); // seulement ce qui touche le perso
     if (a.pick) masks = a.pick.map((i) => masks[i]).filter(Boolean);
-    const frames = masks.filter((m) => m.some((v) => v)).map((m) => extractHi(zone, m, fg, hz));
+    const frames = masks.filter((m) => m.some((v) => v)).map((m) => {
+      const fr = extractHi(zone, m, fg, hz);
+      return a.unmatte ? unmatte(fr, a.unmatte) : fr;
+    });
     report.push(`${name}:${frames.length}${a.frames && segs.length !== a.frames ? ' ⚠' : ''}`);
     all.push(...frames);
-    anims[name] = { frames, fps: a.fps, loop: a.loop, phased: a.phased };
+    anims[name] = { frames, fps: a.fps, loop: a.loop, phased: a.phased, scale: a.scale };
   }
 
   const { width, height } = pack(all, Math.floor(4096 / UP) * UP);
@@ -901,7 +1046,8 @@ async function importCharacter(id, cfg) {
       ...(a.fps ? { fps: a.fps } : {}),
       ...(a.loop != null ? { loop: a.loop } : {}),
       ...(a.phased ? { phased: true } : {}),
-      frames: a.frames.map((f) => [f.x, f.y, f.w, f.h, f.ax, f.ay]),
+      // scale : pose dessinée trop grande/petite sur la planche (un nombre, ou un par frame)
+      frames: a.frames.map((f, i) => { const m = Array.isArray(a.scale) ? a.scale[i] ?? 1 : a.scale ?? 1; return m === 1 ? [f.x, f.y, f.w, f.h, f.ax, f.ay] : [f.x, f.y, f.w, f.h, f.ax, f.ay, m]; }),
     };
   }
 
@@ -933,10 +1079,32 @@ async function importCharacter(id, cfg) {
   await makeMobileAssets(id); // versions WebP légères pour les manettes
 }
 
+// node tools/import-sprites.mjs <perso> --anchors : recalcule ancrages et corrections d'échelle ("scale") depuis l'atlas
+// existant, sans redécouper les planches (utile pour les planches opaques détourées avec Vision sur macOS).
+if (process.argv[3] === '--anchors') {
+  const id = process.argv[2], cfg = CONFIG[id];
+  const jsonPath = path.join(ROOT, 'public/characters', id, 'character.json');
+  const def = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+  const { data, info } = await sharp(fs.readFileSync(path.join(ROOT, 'public/characters', id, def.sprite.atlas))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (const [name, a] of Object.entries(def.sprite.animations)) {
+    const sc = cfg.animations[name]?.scale ?? 1;
+    a.frames = a.frames.map(([x, y, w, h], i) => {
+      const buf = Buffer.alloc(w * h * 4);
+      for (let r = 0; r < h; r++) data.copy(buf, r * w * 4, ((y + r) * info.width + x) * 4, ((y + r) * info.width + x + w) * 4);
+      const { ax, ay } = anchored(buf, w, h);
+      const m = Array.isArray(sc) ? sc[i] ?? 1 : sc;
+      return m === 1 ? [x, y, w, h, ax, ay] : [x, y, w, h, ax, ay, m];
+    });
+  }
+  fs.writeFileSync(jsonPath, JSON.stringify(def, null, 2) + '\n');
+  console.log(`${id}: ancrages recalculés`);
+  process.exit(0);
+}
+
 // Débogage : node tools/import-sprites.mjs <perso> --mask <animation> <fichier.png> enregistre la zone HD détourée sur fond magenta.
 if (process.argv[3] === '--mask') {
   const [id, , anim, file] = process.argv.slice(2);
-  const cfg = CONFIG[id], a = cfg.animations[anim], r = a.rect || a.rects[0];
+  const cfg = CONFIG[id], a = cfg.animations[anim], r = a.rect || a.rects[0].r || a.rects[0];
   const sheetFile = path.join(ROOT, 'sprites_raw', id, a.sheet || cfg.sheet || 'planche.webp');
   const sheet = await load(sheetFile);
   TOL = cfg.tolerance ?? BG_TOLERANCE;
@@ -955,8 +1123,11 @@ if (process.argv[3] === '--mask') {
   process.exit(0);
 }
 
+// node tools/import-sprites.mjs <perso> --only anim1,anim2 : redécoupe seulement ces animations, les autres gardent
+// leurs images (utile quand une planche du perso est opaque et a été détourée avec Vision sur macOS).
 const only = process.argv[2];
+const onlyAnims = process.argv[3] === '--only' ? process.argv[4].split(',') : null;
 for (const [id, cfg] of Object.entries(CONFIG)) {
   if (only && id !== only) continue;
-  await importCharacter(id, cfg);
+  await importCharacter(id, cfg, onlyAnims);
 }

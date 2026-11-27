@@ -1,6 +1,6 @@
 # FightClub · Édition présidentielle
 
-Jeu de combat local en pixel-art, façon débat présidentiel qui dégénère. Le Mac affiche l'arène (une nacelle au-dessus de Paris), les téléphones servent de manettes. Candidats : Mélenchon, Bardella, Mao Zedong, Netanyahu, Zemmour, Pascal Praud et Mbappé (ces trois derniers avec un sprite provisoire, en attendant leur planche : voir `sprites_raw/PROMPTS_NOUVEAUX_PERSOS.md`).
+Jeu de combat local en pixel-art, façon débat présidentiel qui dégénère. Le Mac affiche l'arène (une nacelle au-dessus de Paris), les téléphones servent de manettes. Candidats : Mélenchon, Bardella, Mao Zedong, Netanyahu, Zemmour, Pascal Praud, Mbappé, Kim Jong-un, Macron, Napoléon, Marion Maréchal et Khalamité (Praud, Mbappé et Zemmour avec un sprite provisoire, en attendant leur planche : voir `sprites_raw/PROMPTS_NOUVEAUX_PERSOS.md`).
 
 ## Lancer
 

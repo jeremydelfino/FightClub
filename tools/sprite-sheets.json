@@ -55,7 +55,8 @@
         "frames": 6,
         "fps": 14,
         "loop": true,
-        "main": "touch"
+        "main": "touch",
+        "scale": 1.08
       },
       "jumpsquat": {
         "sheet": "planche_deplacements.png",
@@ -189,6 +190,14 @@
         "cuts": [
           210,
           470
+        ],
+        "clear": [
+          [
+            30,
+            40,
+            395,
+            66
+          ]
         ]
       },
       "ftilt": {
@@ -405,11 +414,12 @@
           [
             553,
             60,
-            742,
+            736,
             252
           ]
         ],
-        "main": false
+        "main": false,
+        "scale": 0.91
       },
       "special_side": {
         "sheet": "planche_speciaux.png",
@@ -434,7 +444,8 @@
           ]
         ],
         "main": false,
-        "phased": true
+        "phased": true,
+        "scale": 0.91
       },
       "special_up": {
         "sheet": "planche_speciaux.png",
@@ -458,7 +469,8 @@
             758
           ]
         ],
-        "main": false
+        "main": false,
+        "scale": 0.91
       },
       "special_down": {
         "sheet": "planche_speciaux.png",
@@ -490,7 +502,8 @@
             742,
             814
           ]
-        ]
+        ],
+        "scale": 0.91
       },
       "fx_bubble1": {
         "sheet": "planche_speciaux.png",
@@ -994,23 +1007,9 @@
             328,
             442,
             507
-          ],
-          [
-            423,
-            298,
-            882,
-            512
           ]
         ],
-        "main": false,
-        "clear": [
-          [
-            418,
-            278,
-            682,
-            332
-          ]
-        ]
+        "main": false
       },
       "special_up": {
         "sheet": "planche_speciaux.png",
@@ -1026,23 +1025,9 @@
             588,
             447,
             762
-          ],
-          [
-            453,
-            558,
-            967,
-            772
           ]
         ],
-        "main": false,
-        "clear": [
-          [
-            448,
-            528,
-            732,
-            582
-          ]
-        ]
+        "main": false
       },
       "special_down": {
         "sheet": "planche_speciaux.png",
@@ -1058,23 +1043,9 @@
             848,
             457,
             1007
-          ],
-          [
-            483,
-            798,
-            957,
-            1012
           ]
         ],
-        "main": false,
-        "clear": [
-          [
-            478,
-            778,
-            720,
-            838
-          ]
-        ]
+        "main": false
       },
       "fx_book": {
         "sheet": "planche_speciaux.png",
@@ -1344,7 +1315,8 @@
         "cuts": [
           162,
           332
-        ]
+        ],
+        "scale": 0.92
       },
       "ftilt": {
         "sheet": "planche_attaques.png",
@@ -1367,7 +1339,8 @@
             1007,
             60
           ]
-        ]
+        ],
+        "scale": 0.92
       },
       "utilt": {
         "sheet": "planche_attaques.png",
@@ -1390,7 +1363,8 @@
             264,
             330
           ]
-        ]
+        ],
+        "scale": 0.92
       },
       "dtilt": {
         "sheet": "planche_attaques.png",
@@ -1405,7 +1379,8 @@
         "cuts": [
           202,
           642
-        ]
+        ],
+        "scale": 0.92
       },
       "nair": {
         "sheet": "planche_attaques.png",
@@ -1572,7 +1547,8 @@
             264
           ]
         ],
-        "main": false
+        "main": false,
+        "scale": 0.92
       },
       "special_side": {
         "sheet": "planche_speciaux.png",
@@ -1596,7 +1572,8 @@
             507
           ]
         ],
-        "main": false
+        "main": false,
+        "scale": 0.92
       },
       "special_up": {
         "sheet": "planche_speciaux.png",
@@ -1614,7 +1591,8 @@
             752
           ]
         ],
-        "main": false
+        "main": false,
+        "scale": 0.92
       },
       "special_down": {
         "sheet": "planche_speciaux.png",
@@ -1638,7 +1616,8 @@
             1007
           ]
         ],
-        "main": false
+        "main": false,
+        "scale": 0.92
       },
       "fx_dome": {
         "sheet": "planche_speciaux.png",
@@ -1801,7 +1780,7 @@
         "sheet": "planche_deplacements.png",
         "rects": [
           [
-            148,
+            186,
             570,
             297,
             754
@@ -2099,7 +2078,7 @@
           ],
           [
             953,
-            826,
+            838,
             1122,
             1007
           ],
@@ -2145,18 +2124,6 @@
             43,
             323,
             232,
-            502
-          ],
-          [
-            238,
-            323,
-            557,
-            502
-          ],
-          [
-            583,
-            323,
-            1012,
             502
           ]
         ],
@@ -3260,23 +3227,9 @@
             328,
             427,
             507
-          ],
-          [
-            413,
-            288,
-            997,
-            507
           ]
         ],
-        "main": false,
-        "clear": [
-          [
-            403,
-            278,
-            507,
-            330
-          ]
-        ]
+        "main": false
       },
       "special_up": {
         "sheet": "planche_speciaux.png",
@@ -3342,7 +3295,15 @@
             267
           ]
         ],
-        "main": false
+        "main": false,
+        "clear": [
+          [
+            680,
+            125,
+            756,
+            270
+          ]
+        ]
       },
       "fx_shield": {
         "sheet": "planche_speciaux.png",
@@ -3798,12 +3759,6 @@
             318,
             505,
             505
-          ],
-          [
-            520,
-            320,
-            955,
-            505
           ]
         ],
         "main": false
@@ -3854,23 +3809,9 @@
             825,
             525,
             1005
-          ],
-          [
-            625,
-            775,
-            1120,
-            1005
           ]
         ],
-        "main": false,
-        "clear": [
-          [
-            600,
-            770,
-            640,
-            822
-          ]
-        ]
+        "main": false
       },
       "fx_sound": {
         "sheet": "planche_speciaux.png",
@@ -4410,7 +4351,8 @@
           62,
           32,
           34
-        ]
+        ],
+        "scale": 1.16
       },
       "special_side": {
         "sheet": "planche_speciaux.png",
@@ -4440,7 +4382,8 @@
           32,
           34
         ],
-        "phased": true
+        "phased": true,
+        "scale": 1.27
       },
       "special_up": {
         "sheet": "planche_speciaux.png",
@@ -4463,7 +4406,8 @@
           62,
           32,
           34
-        ]
+        ],
+        "scale": 1.27
       },
       "special_down": {
         "sheet": "planche_speciaux.png",
@@ -4486,7 +4430,8 @@
           62,
           32,
           34
-        ]
+        ],
+        "scale": 1.2
       },
       "fx_waves": {
         "sheet": "planche_speciaux.png",
@@ -4500,6 +4445,11 @@
         ],
         "main": false,
         "bg": [
+          62,
+          32,
+          34
+        ],
+        "unmatte": [
           62,
           32,
           34
@@ -4560,5 +4510,3960 @@
       }
     },
     "strong": 110
+  },
+  "kim": {
+    "upscale": 2,
+    "height": 38,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      16,
+      0,
+      1760,
+      552
+    ],
+    "icon": [
+      745,
+      588,
+      1025,
+      868
+    ],
+    "altFilter": "saturate(0.6) brightness(1.25)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          24,
+          64,
+          600,
+          252
+        ],
+        "frames": 4,
+        "fps": 4,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          640,
+          70,
+          1496,
+          256
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "scale": 1.1
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            12,
+            344,
+            152,
+            500
+          ],
+          [
+            150,
+            344,
+            282,
+            500
+          ],
+          [
+            282,
+            344,
+            410,
+            500
+          ],
+          [
+            406,
+            344,
+            532,
+            500
+          ],
+          [
+            534,
+            344,
+            676,
+            500
+          ],
+          [
+            676,
+            344,
+            826,
+            500
+          ]
+        ],
+        "fps": 11,
+        "loop": true,
+        "scale": 1.13
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            10,
+            648,
+            138,
+            778
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "scale": 1.08
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            138,
+            600,
+            284,
+            778
+          ],
+          [
+            288,
+            580,
+            432,
+            752
+          ]
+        ],
+        "main": false,
+        "fps": 7,
+        "loop": false,
+        "scale": 1.08
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          452,
+          592,
+          1052,
+          772
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1076,
+          592,
+          1500,
+          780
+        ],
+        "frames": 3,
+        "fps": 6,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          8,
+          864,
+          440,
+          1020
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            504,
+            888,
+            656,
+            1018
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          850,
+          350,
+          1510,
+          500
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true,
+        "scale": 1.1
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            768,
+            860,
+            924,
+            1018
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          984,
+          868,
+          1512,
+          1020
+        ],
+        "frames": 3,
+        "fps": 10,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            44,
+            76,
+            212,
+            258
+          ],
+          [
+            240,
+            76,
+            436,
+            258
+          ],
+          [
+            438,
+            76,
+            648,
+            258
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.95
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            696,
+            72,
+            884,
+            258
+          ],
+          [
+            920,
+            18,
+            1116,
+            258
+          ],
+          [
+            1132,
+            72,
+            1528,
+            258
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "clear": [
+          [
+            650,
+            10,
+            957,
+            66
+          ]
+        ],
+        "scale": 0.95
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            40,
+            344,
+            220,
+            514
+          ],
+          [
+            244,
+            340,
+            444,
+            514
+          ],
+          [
+            452,
+            300,
+            684,
+            514
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.95
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            760,
+            350,
+            932,
+            518
+          ],
+          [
+            952,
+            350,
+            1196,
+            518
+          ],
+          [
+            1198,
+            354,
+            1520,
+            516
+          ]
+        ],
+        "main": false,
+        "phased": true
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            8,
+            600,
+            160,
+            740
+          ],
+          [
+            160,
+            600,
+            312,
+            740
+          ]
+        ],
+        "main": false
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            328,
+            604,
+            464,
+            738
+          ],
+          [
+            464,
+            604,
+            632,
+            738
+          ]
+        ],
+        "main": false
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            644,
+            600,
+            768,
+            740
+          ],
+          [
+            768,
+            600,
+            928,
+            740
+          ]
+        ],
+        "main": false,
+        "scale": 0.83
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            948,
+            590,
+            1068,
+            744
+          ],
+          [
+            1084,
+            592,
+            1212,
+            760
+          ]
+        ],
+        "main": false,
+        "scale": 0.83
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1244,
+            600,
+            1356,
+            732
+          ],
+          [
+            1376,
+            590,
+            1520,
+            744
+          ]
+        ],
+        "main": false,
+        "scale": 0.87
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            40,
+            828,
+            236,
+            1010
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            332,
+            834,
+            528,
+            1000
+          ],
+          [
+            560,
+            830,
+            748,
+            1000
+          ]
+        ],
+        "main": false,
+        "fps": 5,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1220,
+            800,
+            1520,
+            1016
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            68,
+            58,
+            248,
+            258
+          ],
+          [
+            340,
+            58,
+            552,
+            258
+          ],
+          [
+            620,
+            62,
+            900,
+            258
+          ]
+        ],
+        "main": false,
+        "scale": 0.81
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            28,
+            316,
+            284,
+            500
+          ],
+          [
+            336,
+            316,
+            536,
+            500
+          ],
+          [
+            596,
+            316,
+            916,
+            500
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.86
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            88,
+            556,
+            284,
+            748
+          ],
+          [
+            382,
+            552,
+            644,
+            752
+          ],
+          [
+            726,
+            550,
+            960,
+            760
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            670,
+            505,
+            848,
+            549
+          ]
+        ],
+        "scale": 0.86
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            20,
+            804,
+            272,
+            1010
+          ],
+          [
+            312,
+            804,
+            580,
+            1010
+          ],
+          [
+            652,
+            796,
+            888,
+            1008
+          ]
+        ],
+        "main": false,
+        "scale": 0.81
+      },
+      "fx_grenade": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1038,
+            92,
+            1132,
+            202
+          ]
+        ],
+        "main": true
+      },
+      "fx_boom": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1160,
+            36,
+            1516,
+            256
+          ]
+        ],
+        "main": false
+      },
+      "fx_missile": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            916,
+            344,
+            1224,
+            476
+          ]
+        ],
+        "main": false
+      },
+      "fx_mushroom": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1220,
+            288,
+            1524,
+            492
+          ]
+        ],
+        "main": false
+      },
+      "fx_c4": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            948,
+            780,
+            1104,
+            1012
+          ]
+        ],
+        "main": false
+      },
+      "fx_c4boom": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1156,
+            784,
+            1512,
+            1004
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "macron": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      10,
+      10,
+      1764,
+      550
+    ],
+    "icon": [
+      745,
+      586,
+      1027,
+      868
+    ],
+    "altFilter": "saturate(0.55) brightness(1.2)",
+    "aliases": {
+      "helpless": "fall"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          40,
+          66,
+          592,
+          250
+        ],
+        "frames": 4,
+        "fps": 6,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          696,
+          66,
+          1522,
+          246
+        ],
+        "frames": 6,
+        "fps": 11,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          6,
+          334,
+          816,
+          492
+        ],
+        "frames": 6,
+        "fps": 15,
+        "loop": true,
+        "main": "touch"
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            12,
+            640,
+            120,
+            764
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            124,
+            604,
+            246,
+            766
+          ],
+          [
+            246,
+            568,
+            362,
+            730
+          ],
+          [
+            360,
+            600,
+            460,
+            732
+          ]
+        ],
+        "main": false,
+        "fps": 8,
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          488,
+          572,
+          984,
+          764
+        ],
+        "frames": 4,
+        "fps": 13,
+        "loop": false,
+        "clear": [
+          [
+            460,
+            520,
+            790,
+            586
+          ]
+        ]
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1018,
+          594,
+          1520,
+          768
+        ],
+        "frames": 4,
+        "fps": 7,
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          12,
+          850,
+          404,
+          1004
+        ],
+        "frames": 3,
+        "fps": 14,
+        "loop": false
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            560,
+            896,
+            672,
+            1004
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dash": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          830,
+          334,
+          1516,
+          492
+        ],
+        "frames": 3,
+        "fps": 12,
+        "loop": true
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "rects": [
+          [
+            724,
+            852,
+            832,
+            1004
+          ]
+        ],
+        "main": false,
+        "loop": true
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "rect": [
+          1010,
+          850,
+          1514,
+          1006
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            36,
+            60,
+            186,
+            250
+          ],
+          [
+            228,
+            60,
+            436,
+            250
+          ],
+          [
+            436,
+            60,
+            662,
+            250
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.84
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            700,
+            60,
+            866,
+            250
+          ],
+          [
+            912,
+            52,
+            1134,
+            250
+          ],
+          [
+            1134,
+            40,
+            1530,
+            258
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.84
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            32,
+            340,
+            188,
+            504
+          ],
+          [
+            224,
+            290,
+            414,
+            506
+          ],
+          [
+            416,
+            252,
+            672,
+            506
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "clear": [
+          [
+            0,
+            258,
+            296,
+            310
+          ]
+        ],
+        "scale": 0.84
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            716,
+            330,
+            894,
+            506
+          ],
+          [
+            904,
+            330,
+            1170,
+            508
+          ],
+          [
+            1170,
+            306,
+            1516,
+            508
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.84
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            6,
+            572,
+            166,
+            718
+          ],
+          [
+            166,
+            572,
+            322,
+            718
+          ]
+        ],
+        "main": false
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            324,
+            572,
+            472,
+            712
+          ],
+          [
+            476,
+            572,
+            646,
+            712
+          ]
+        ],
+        "main": false
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            644,
+            564,
+            784,
+            712
+          ],
+          [
+            784,
+            566,
+            936,
+            724
+          ]
+        ],
+        "main": false
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            944,
+            564,
+            1076,
+            720
+          ],
+          [
+            1080,
+            552,
+            1232,
+            720
+          ]
+        ],
+        "main": false,
+        "clear": [
+          [
+            940,
+            510,
+            1124,
+            563
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1244,
+            572,
+            1378,
+            724
+          ],
+          [
+            1376,
+            572,
+            1528,
+            728
+          ]
+        ],
+        "main": false
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            16,
+            780,
+            244,
+            1010
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "scale": 0.84
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            276,
+            780,
+            512,
+            990
+          ],
+          [
+            512,
+            780,
+            752,
+            994
+          ]
+        ],
+        "main": false,
+        "fps": 6,
+        "loop": true,
+        "scale": 0.84
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1136,
+            736,
+            1530,
+            1008
+          ]
+        ],
+        "main": false,
+        "loop": true,
+        "scale": 0.84
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            296,
+            40,
+            504,
+            286
+          ],
+          [
+            516,
+            52,
+            806,
+            288
+          ],
+          [
+            792,
+            60,
+            1030,
+            288
+          ]
+        ],
+        "main": true,
+        "phased": true,
+        "clear": [
+          [
+            0,
+            30,
+            318,
+            290
+          ]
+        ],
+        "scale": 0.74
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            296,
+            328,
+            504,
+            524
+          ],
+          [
+            478,
+            334,
+            778,
+            526
+          ],
+          [
+            796,
+            302,
+            1038,
+            536
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "clear": [
+          [
+            0,
+            300,
+            318,
+            530
+          ]
+        ],
+        "scale": 0.74
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            296,
+            540,
+            516,
+            780
+          ],
+          [
+            552,
+            518,
+            774,
+            798
+          ]
+        ],
+        "main": true,
+        "clear": [
+          [
+            0,
+            540,
+            318,
+            782
+          ]
+        ],
+        "scale": 0.74
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            312,
+            794,
+            512,
+            1004
+          ],
+          [
+            544,
+            790,
+            840,
+            1004
+          ],
+          [
+            864,
+            786,
+            1148,
+            1004
+          ]
+        ],
+        "main": false,
+        "phased": true,
+        "scale": 0.74
+      },
+      "fx_powder": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1252,
+            44,
+            1534,
+            280
+          ]
+        ],
+        "main": false
+      },
+      "fx_dissolution": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1072,
+            536,
+            1518,
+            780
+          ]
+        ],
+        "main": false
+      },
+      "fx_powderball": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1042,
+            124,
+            1236,
+            224
+          ]
+        ],
+        "main": true
+      },
+      "fx_vest": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1172,
+            804,
+            1480,
+            1000
+          ]
+        ],
+        "main": false
+      }
+    }
+  },
+  "napoleon": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      846,
+      180,
+      1508,
+      596
+    ],
+    "icon": [
+      664,
+      646,
+      874,
+      856
+    ],
+    "altFilter": "hue-rotate(150deg) saturate(1.1)",
+    "aliases": {
+      "helpless": "fall",
+      "dodge": "shield",
+      "crouch": "land",
+      "jumpsquat": "land"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            18,
+            78,
+            142,
+            246
+          ],
+          [
+            26,
+            346,
+            138,
+            502
+          ],
+          [
+            18,
+            598,
+            138,
+            762
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            802,
+            58,
+            930,
+            202
+          ],
+          [
+            994,
+            70,
+            1138,
+            202
+          ],
+          [
+            1182,
+            56,
+            1362,
+            202
+          ],
+          [
+            1366,
+            70,
+            1536,
+            202
+          ]
+        ],
+        "fps": 8,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            802,
+            58,
+            930,
+            202
+          ],
+          [
+            994,
+            70,
+            1138,
+            202
+          ],
+          [
+            1182,
+            56,
+            1362,
+            202
+          ],
+          [
+            1366,
+            70,
+            1536,
+            202
+          ]
+        ],
+        "fps": 12,
+        "loop": true
+      },
+      "jump": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            942,
+            462,
+            1082,
+            570
+          ]
+        ],
+        "loop": false
+      },
+      "jump2": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            552,
+            458,
+            748,
+            594
+          ],
+          [
+            746,
+            462,
+            902,
+            598
+          ]
+        ],
+        "fps": 10,
+        "loop": false
+      },
+      "fall": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1254,
+            462,
+            1362,
+            590
+          ]
+        ],
+        "loop": true
+      },
+      "land": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            346,
+            862,
+            478,
+            998
+          ]
+        ],
+        "loop": false
+      },
+      "shield": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            418,
+            82,
+            566,
+            246
+          ]
+        ],
+        "loop": true
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            212,
+            56,
+            374,
+            202
+          ],
+          [
+            390,
+            56,
+            534,
+            202
+          ],
+          [
+            578,
+            56,
+            774,
+            202
+          ]
+        ],
+        "phased": true
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            22,
+            266,
+            182,
+            398
+          ],
+          [
+            202,
+            266,
+            350,
+            398
+          ],
+          [
+            378,
+            266,
+            578,
+            398
+          ],
+          [
+            586,
+            266,
+            778,
+            398
+          ]
+        ]
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            798,
+            276,
+            938,
+            398
+          ],
+          [
+            990,
+            234,
+            1122,
+            402
+          ],
+          [
+            1170,
+            226,
+            1302,
+            398
+          ],
+          [
+            1358,
+            206,
+            1494,
+            402
+          ]
+        ]
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            622,
+            670,
+            786,
+            778
+          ],
+          [
+            774,
+            670,
+            930,
+            778
+          ],
+          [
+            930,
+            670,
+            1094,
+            778
+          ]
+        ],
+        "phased": true
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            552,
+            458,
+            748,
+            594
+          ],
+          [
+            746,
+            462,
+            902,
+            598
+          ]
+        ]
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            942,
+            462,
+            1082,
+            570
+          ],
+          [
+            1070,
+            498,
+            1234,
+            606
+          ]
+        ]
+      },
+      "bair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            318,
+            666,
+            462,
+            798
+          ],
+          [
+            470,
+            674,
+            586,
+            774
+          ]
+        ]
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            18,
+            666,
+            150,
+            786
+          ],
+          [
+            166,
+            666,
+            278,
+            786
+          ]
+        ]
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1254,
+            462,
+            1362,
+            590
+          ],
+          [
+            1390,
+            478,
+            1498,
+            618
+          ]
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            34,
+            866,
+            134,
+            994
+          ],
+          [
+            142,
+            878,
+            238,
+            994
+          ]
+        ],
+        "fps": 8,
+        "loop": true
+      },
+      "tumble": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            462,
+            866,
+            578,
+            970
+          ],
+          [
+            590,
+            882,
+            694,
+            974
+          ],
+          [
+            702,
+            870,
+            818,
+            966
+          ],
+          [
+            854,
+            866,
+            950,
+            966
+          ]
+        ],
+        "fps": 10,
+        "loop": true
+      },
+      "victory": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            1006,
+            870,
+            1110,
+            1014
+          ],
+          [
+            1142,
+            830,
+            1262,
+            1014
+          ],
+          [
+            1302,
+            814,
+            1514,
+            1014
+          ]
+        ],
+        "fps": 4,
+        "loop": false
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            222,
+            78,
+            374,
+            246
+          ],
+          [
+            418,
+            82,
+            566,
+            246
+          ]
+        ],
+        "phased": true
+      },
+      "special_neutral_hit": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            630,
+            58,
+            856,
+            246
+          ],
+          [
+            856,
+            82,
+            1058,
+            246
+          ],
+          [
+            1070,
+            82,
+            1318,
+            246
+          ],
+          [
+            1334,
+            82,
+            1534,
+            246
+          ]
+        ],
+        "main": false
+      },
+      "special_side": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            170,
+            346,
+            350,
+            502
+          ],
+          [
+            348,
+            346,
+            540,
+            502
+          ],
+          [
+            538,
+            346,
+            718,
+            502
+          ]
+        ],
+        "phased": true,
+        "main": false
+      },
+      "special_up": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            190,
+            602,
+            330,
+            762
+          ],
+          [
+            354,
+            590,
+            502,
+            762
+          ],
+          [
+            522,
+            574,
+            662,
+            758
+          ],
+          [
+            702,
+            554,
+            846,
+            770
+          ],
+          [
+            882,
+            550,
+            1038,
+            770
+          ]
+        ],
+        "main": false
+      },
+      "special_down": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            178,
+            854,
+            306,
+            994
+          ],
+          [
+            346,
+            862,
+            478,
+            998
+          ],
+          [
+            514,
+            854,
+            690,
+            1002
+          ],
+          [
+            710,
+            846,
+            870,
+            1002
+          ],
+          [
+            898,
+            846,
+            1026,
+            998
+          ]
+        ],
+        "main": false
+      },
+      "fx_mark": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            796,
+            336,
+            940,
+            474
+          ],
+          [
+            986,
+            338,
+            1126,
+            478
+          ],
+          [
+            1166,
+            338,
+            1302,
+            478
+          ],
+          [
+            1350,
+            338,
+            1486,
+            478
+          ]
+        ],
+        "main": false
+      },
+      "fx_crown": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1142,
+            602,
+            1250,
+            698
+          ]
+        ]
+      },
+      "fx_rise": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1262,
+            550,
+            1458,
+            766
+          ]
+        ],
+        "main": false
+      },
+      "fx_mount": {
+        "sheet": "planche_speciaux.png",
+        "rects": [
+          [
+            1114,
+            954,
+            1238,
+            986
+          ],
+          [
+            1250,
+            902,
+            1374,
+            986
+          ],
+          [
+            1390,
+            846,
+            1502,
+            986
+          ]
+        ],
+        "main": false
+      },
+      "m_idle": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            28,
+            52,
+            184,
+            190
+          ],
+          [
+            180,
+            52,
+            314,
+            190
+          ],
+          [
+            322,
+            52,
+            458,
+            190
+          ],
+          [
+            464,
+            52,
+            600,
+            190
+          ]
+        ],
+        "fps": 5,
+        "loop": true,
+        "scale": 1.53
+      },
+      "m_walk": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            636,
+            52,
+            778,
+            190
+          ],
+          [
+            784,
+            52,
+            922,
+            190
+          ],
+          [
+            926,
+            52,
+            1060,
+            190
+          ],
+          [
+            1062,
+            52,
+            1200,
+            190
+          ],
+          [
+            1204,
+            52,
+            1356,
+            190
+          ],
+          [
+            1356,
+            52,
+            1508,
+            190
+          ]
+        ],
+        "fps": 10,
+        "loop": true,
+        "scale": 1.53
+      },
+      "m_run": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            12,
+            246,
+            182,
+            380
+          ],
+          [
+            196,
+            246,
+            354,
+            380
+          ],
+          [
+            376,
+            246,
+            532,
+            382
+          ],
+          [
+            552,
+            246,
+            720,
+            380
+          ],
+          [
+            740,
+            246,
+            900,
+            376
+          ],
+          [
+            924,
+            246,
+            1096,
+            384
+          ]
+        ],
+        "fps": 14,
+        "loop": true,
+        "scale": 1.53
+      },
+      "m_jump": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            26,
+            434,
+            160,
+            594
+          ],
+          [
+            176,
+            434,
+            312,
+            572
+          ],
+          [
+            316,
+            430,
+            460,
+            560
+          ]
+        ],
+        "fps": 8,
+        "loop": false,
+        "scale": 1.53
+      },
+      "m_jump2": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            498,
+            434,
+            624,
+            574
+          ],
+          [
+            634,
+            434,
+            762,
+            564
+          ],
+          [
+            768,
+            430,
+            896,
+            560
+          ],
+          [
+            904,
+            434,
+            1036,
+            568
+          ]
+        ],
+        "fps": 12,
+        "loop": false,
+        "scale": 1.53
+      },
+      "m_fall": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            1084,
+            434,
+            1218,
+            572
+          ],
+          [
+            1234,
+            444,
+            1372,
+            580
+          ],
+          [
+            1384,
+            464,
+            1528,
+            596
+          ]
+        ],
+        "fps": 7,
+        "loop": true,
+        "scale": 1.53
+      },
+      "m_land": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            20,
+            652,
+            144,
+            794
+          ],
+          [
+            154,
+            666,
+            276,
+            794
+          ],
+          [
+            276,
+            672,
+            408,
+            794
+          ]
+        ],
+        "fps": 14,
+        "loop": false,
+        "scale": 1.53
+      },
+      "m_attack": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            426,
+            646,
+            568,
+            790
+          ],
+          [
+            568,
+            646,
+            736,
+            790
+          ],
+          [
+            736,
+            646,
+            916,
+            790
+          ],
+          [
+            908,
+            646,
+            1054,
+            792
+          ]
+        ],
+        "main": false,
+        "scale": 1.53
+      },
+      "m_hurt": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            1082,
+            652,
+            1210,
+            794
+          ]
+        ],
+        "fps": 8,
+        "loop": true,
+        "scale": 1.53
+      },
+      "dismount": {
+        "sheet": "planche_cheval.png",
+        "rects": [
+          [
+            32,
+            858,
+            182,
+            1004
+          ],
+          [
+            204,
+            854,
+            340,
+            984
+          ],
+          [
+            360,
+            864,
+            472,
+            968
+          ],
+          [
+            510,
+            894,
+            622,
+            1004
+          ]
+        ],
+        "fps": 8,
+        "loop": false,
+        "scale": [
+          1.53,
+          1.53,
+          1.3,
+          1.2
+        ]
+      }
+    }
+  },
+  "marion": {
+    "upscale": 2,
+    "height": 36,
+    "altFilter": "hue-rotate(150deg) saturate(1.1)",
+    "aliases": {
+      "helpless": "fall",
+      "tumble": "hurt",
+      "dash": "dodge"
+    },
+    "tight": 4,
+    "animations": {
+      "idle": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            542,
+            18,
+            675,
+            241
+          ],
+          [
+            711,
+            18,
+            840,
+            239
+          ],
+          [
+            217,
+            18,
+            344,
+            239
+          ]
+        ],
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            876,
+            18,
+            1018,
+            232
+          ],
+          [
+            1054,
+            18,
+            1195,
+            229
+          ],
+          [
+            1231,
+            18,
+            1370,
+            228
+          ],
+          [
+            1578,
+            18,
+            1718,
+            228
+          ],
+          [
+            1406,
+            18,
+            1542,
+            228
+          ],
+          [
+            1754,
+            18,
+            1889,
+            231
+          ],
+          [
+            1925,
+            18,
+            2076,
+            228
+          ]
+        ],
+        "fps": 11,
+        "loop": true
+      },
+      "run": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            18,
+            277,
+            171,
+            448
+          ],
+          [
+            612,
+            277,
+            777,
+            445
+          ],
+          [
+            207,
+            277,
+            371,
+            444
+          ],
+          [
+            407,
+            277,
+            576,
+            445
+          ],
+          [
+            2112,
+            18,
+            2270,
+            196
+          ]
+        ],
+        "fps": 14,
+        "loop": true,
+        "scale": 0.98
+      },
+      "jumpsquat": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1003,
+            277,
+            1136,
+            440
+          ]
+        ],
+        "loop": false,
+        "scale": 0.97
+      },
+      "jump": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1172,
+            277,
+            1304,
+            438
+          ]
+        ],
+        "loop": false,
+        "scale": 0.97
+      },
+      "jump2": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1680,
+            277,
+            1806,
+            433
+          ]
+        ],
+        "loop": false,
+        "scale": 0.97
+      },
+      "fall": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1340,
+            277,
+            1473,
+            441
+          ]
+        ],
+        "loop": true,
+        "scale": 0.97
+      },
+      "land": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1509,
+            277,
+            1644,
+            434
+          ],
+          [
+            397,
+            484,
+            542,
+            623
+          ]
+        ],
+        "fps": 12,
+        "loop": false,
+        "scale": 0.97
+      },
+      "crouch": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            578,
+            484,
+            713,
+            621
+          ]
+        ],
+        "loop": true,
+        "scale": 0.97
+      },
+      "dodge": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1379,
+            484,
+            1575,
+            620
+          ],
+          [
+            748,
+            667,
+            915,
+            795
+          ],
+          [
+            951,
+            667,
+            1137,
+            797
+          ],
+          [
+            1611,
+            484,
+            1757,
+            617
+          ]
+        ],
+        "fps": 14,
+        "loop": false,
+        "scale": 0.96
+      },
+      "shield": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            813,
+            277,
+            967,
+            445
+          ]
+        ],
+        "loop": true,
+        "scale": 0.97
+      },
+      "hurt": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1842,
+            277,
+            1963,
+            433
+          ]
+        ],
+        "loop": true,
+        "scale": 0.97
+      },
+      "victory": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            380,
+            18,
+            506,
+            241
+          ],
+          [
+            18,
+            18,
+            181,
+            240
+          ]
+        ],
+        "fps": 3,
+        "loop": false,
+        "main": false
+      },
+      "jab": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            425,
+            667,
+            554,
+            796
+          ],
+          [
+            2210,
+            484,
+            2348,
+            620
+          ],
+          [
+            18,
+            667,
+            199,
+            800
+          ]
+        ],
+        "phased": true,
+        "scale": 1.72
+      },
+      "ftilt": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            235,
+            667,
+            389,
+            797
+          ],
+          [
+            1793,
+            484,
+            1980,
+            616
+          ],
+          [
+            2016,
+            484,
+            2174,
+            617
+          ],
+          [
+            179,
+            484,
+            361,
+            631
+          ]
+        ],
+        "scale": 1.73
+      },
+      "utilt": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1999,
+            277,
+            2123,
+            435
+          ],
+          [
+            18,
+            484,
+            143,
+            625
+          ],
+          [
+            2159,
+            277,
+            2300,
+            431
+          ]
+        ],
+        "phased": true,
+        "scale": 1.52
+      },
+      "dtilt": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1173,
+            667,
+            1375,
+            791
+          ],
+          [
+            1411,
+            667,
+            1600,
+            790
+          ],
+          [
+            1636,
+            667,
+            1806,
+            790
+          ]
+        ],
+        "phased": true,
+        "scale": 1.51
+      },
+      "nair": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1238,
+            836,
+            1344,
+            951
+          ],
+          [
+            1380,
+            836,
+            1496,
+            952
+          ],
+          [
+            457,
+            836,
+            597,
+            952
+          ]
+        ],
+        "scale": 1.62
+      },
+      "fair": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            633,
+            836,
+            731,
+            954
+          ],
+          [
+            767,
+            836,
+            876,
+            953
+          ],
+          [
+            1985,
+            667,
+            2098,
+            792
+          ]
+        ],
+        "scale": [
+          1.62,
+          1.62,
+          1.68
+        ]
+      },
+      "bair": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            207,
+            1161,
+            315,
+            1265
+          ],
+          [
+            165,
+            836,
+            276,
+            954
+          ],
+          [
+            18,
+            836,
+            129,
+            951
+          ]
+        ],
+        "scale": 1.63
+      },
+      "uair": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            312,
+            836,
+            421,
+            954
+          ],
+          [
+            590,
+            667,
+            712,
+            800
+          ]
+        ],
+        "scale": [
+          1.62,
+          1.68
+        ]
+      },
+      "dair": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            912,
+            836,
+            1033,
+            954
+          ],
+          [
+            1199,
+            484,
+            1343,
+            625
+          ]
+        ],
+        "scale": [
+          1.62,
+          1.42
+        ]
+      },
+      "special_neutral": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            749,
+            484,
+            850,
+            623
+          ],
+          [
+            886,
+            484,
+            1003,
+            620
+          ],
+          [
+            1039,
+            484,
+            1163,
+            620
+          ]
+        ],
+        "phased": true,
+        "scale": 1.64
+      },
+      "side_lipstick": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            2524,
+            836,
+            2644,
+            952
+          ],
+          [
+            2074,
+            994,
+            2236,
+            1108
+          ],
+          [
+            18,
+            1161,
+            171,
+            1266
+          ]
+        ],
+        "phased": true,
+        "scale": [
+          1.56,
+          1.58,
+          1.6
+        ]
+      },
+      "side_perfume": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            18,
+            994,
+            127,
+            1108
+          ],
+          [
+            616,
+            994,
+            780,
+            1104
+          ],
+          [
+            816,
+            994,
+            983,
+            1104
+          ]
+        ],
+        "phased": true,
+        "scale": 1.58
+      },
+      "side_condom": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            163,
+            994,
+            278,
+            1105
+          ],
+          {
+            "r": [
+              1019,
+              994,
+              1167,
+              1125
+            ],
+            "clear": [
+              [
+                1098,
+                1097,
+                1142,
+                1125
+              ]
+            ]
+          },
+          [
+            1203,
+            994,
+            1349,
+            1106
+          ]
+        ],
+        "phased": true,
+        "scale": 1.58
+      },
+      "side_mirror": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1704,
+            836,
+            1803,
+            948
+          ],
+          [
+            1975,
+            836,
+            2078,
+            950
+          ],
+          [
+            2114,
+            836,
+            2212,
+            948
+          ]
+        ],
+        "phased": true,
+        "scale": 2.08
+      },
+      "side_compact": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            314,
+            994,
+            430,
+            1104
+          ],
+          [
+            351,
+            1161,
+            532,
+            1265
+          ],
+          [
+            568,
+            1161,
+            746,
+            1266
+          ]
+        ],
+        "phased": true,
+        "main": false,
+        "scale": 1.59
+      },
+      "special_up": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1385,
+            994,
+            1531,
+            1100
+          ],
+          [
+            1532,
+            836,
+            1668,
+            953
+          ],
+          [
+            1069,
+            836,
+            1202,
+            958
+          ],
+          [
+            2134,
+            667,
+            2242,
+            797
+          ],
+          [
+            1842,
+            667,
+            1949,
+            798
+          ]
+        ],
+        "scale": [
+          1.99,
+          1.97,
+          1.97,
+          2.04,
+          2.04
+        ]
+      },
+      "special_down": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1839,
+            836,
+            1939,
+            950
+          ],
+          [
+            2248,
+            836,
+            2359,
+            951
+          ],
+          [
+            1567,
+            994,
+            1710,
+            1099
+          ],
+          [
+            1746,
+            994,
+            1864,
+            1101
+          ],
+          [
+            466,
+            994,
+            580,
+            1102
+          ]
+        ],
+        "scale": [
+          2.08,
+          2.08,
+          1.7,
+          1.7,
+          1.7
+        ]
+      },
+      "fx_decoy": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            2395,
+            836,
+            2488,
+            949
+          ]
+        ],
+        "main": false,
+        "scale": 2.08
+      },
+      "fx_poof": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            1900,
+            994,
+            2038,
+            1108
+          ]
+        ],
+        "main": false,
+        "scale": 2.1
+      },
+      "fx_kiss": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            789,
+            1170,
+            865,
+            1244
+          ]
+        ],
+        "main": true
+      },
+      "fx_heart": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          {
+            "r": [
+              928,
+              1173,
+              949,
+              1196
+            ],
+            "clear": [
+              [
+                928,
+                1186,
+                931,
+                1196
+              ]
+            ]
+          }
+        ],
+        "main": true
+      },
+      "fx_lipstick": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          {
+            "r": [
+              938,
+              1176,
+              980,
+              1222
+            ],
+            "clear": [
+              [
+                938,
+                1176,
+                950,
+                1197
+              ]
+            ]
+          }
+        ],
+        "main": true
+      },
+      "fx_perfume": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          {
+            "r": [
+              906,
+              1184,
+              938,
+              1225
+            ],
+            "clear": [
+              [
+                906,
+                1184,
+                913,
+                1209
+              ],
+              [
+                928,
+                1184,
+                938,
+                1197
+              ]
+            ]
+          }
+        ],
+        "main": true
+      },
+      "fx_condom": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          [
+            993,
+            1179,
+            1031,
+            1215
+          ]
+        ],
+        "main": true
+      },
+      "fx_mirror": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          {
+            "r": [
+              869,
+              1171,
+              912,
+              1207
+            ],
+            "clear": [
+              [
+                906,
+                1184,
+                913,
+                1207
+              ]
+            ]
+          }
+        ],
+        "main": true
+      },
+      "fx_compact": {
+        "sheet": "planche_atlas.png",
+        "rects": [
+          {
+            "r": [
+              867,
+              1171,
+              913,
+              1226
+            ],
+            "clear": [
+              [
+                906,
+                1184,
+                913,
+                1226
+              ]
+            ]
+          }
+        ],
+        "main": true
+      }
+    }
+  },
+  "khalamite": {
+    "upscale": 2,
+    "height": 36,
+    "portraitSheet": "planche_portrait.png",
+    "portrait": [
+      400,
+      0,
+      1536,
+      612
+    ],
+    "icon": [
+      60,
+      632,
+      420,
+      992
+    ],
+    "altFilter": "hue-rotate(110deg) saturate(1.1)",
+    "tight": 4,
+    "aliases": {
+      "helpless": "fall",
+      "bair": "nair"
+    },
+    "animations": {
+      "idle": {
+        "sheet": "planche_deplacements.png",
+        "fps": 5,
+        "loop": true,
+        "rects": [
+          [
+            30,
+            64,
+            178,
+            262
+          ],
+          [
+            193,
+            60,
+            332,
+            262
+          ],
+          [
+            343,
+            62,
+            482,
+            262
+          ]
+        ]
+      },
+      "walk": {
+        "sheet": "planche_deplacements.png",
+        "fps": 10,
+        "loop": true,
+        "rects": [
+          [
+            600,
+            64,
+            748,
+            262
+          ],
+          [
+            752,
+            64,
+            897,
+            262
+          ],
+          [
+            899,
+            64,
+            1041,
+            262
+          ],
+          [
+            1043,
+            64,
+            1190,
+            262
+          ],
+          [
+            1193,
+            64,
+            1342,
+            262
+          ],
+          [
+            1348,
+            64,
+            1504,
+            264
+          ]
+        ]
+      },
+      "run": {
+        "sheet": "planche_deplacements.png",
+        "fps": 13,
+        "loop": true,
+        "clear": [
+          [
+            5,
+            452,
+            58,
+            505
+          ],
+          [
+            146,
+            458,
+            216,
+            505
+          ],
+          [
+            286,
+            458,
+            350,
+            505
+          ],
+          [
+            433,
+            458,
+            499,
+            505
+          ],
+          [
+            581,
+            458,
+            649,
+            505
+          ],
+          [
+            726,
+            458,
+            792,
+            505
+          ]
+        ],
+        "rects": [
+          [
+            5,
+            334,
+            182,
+            506
+          ],
+          [
+            182,
+            330,
+            330,
+            506
+          ],
+          [
+            328,
+            330,
+            476,
+            506
+          ],
+          [
+            472,
+            330,
+            616,
+            506
+          ],
+          [
+            612,
+            330,
+            762,
+            506
+          ],
+          [
+            758,
+            330,
+            905,
+            506
+          ]
+        ]
+      },
+      "jumpsquat": {
+        "sheet": "planche_deplacements.png",
+        "loop": false,
+        "rects": [
+          [
+            28,
+            622,
+            163,
+            772
+          ]
+        ]
+      },
+      "jump": {
+        "sheet": "planche_deplacements.png",
+        "loop": false,
+        "rects": [
+          [
+            166,
+            590,
+            296,
+            764
+          ],
+          [
+            283,
+            553,
+            418,
+            752
+          ]
+        ]
+      },
+      "jump2": {
+        "sheet": "planche_deplacements.png",
+        "loop": false,
+        "rects": [
+          [
+            432,
+            578,
+            585,
+            752
+          ],
+          [
+            585,
+            578,
+            763,
+            752
+          ],
+          [
+            763,
+            556,
+            908,
+            752
+          ]
+        ]
+      },
+      "fall": {
+        "sheet": "planche_deplacements.png",
+        "loop": true,
+        "rects": [
+          [
+            915,
+            578,
+            1044,
+            757
+          ]
+        ]
+      },
+      "hurt": {
+        "sheet": "planche_deplacements.png",
+        "loop": true,
+        "rects": [
+          [
+            1058,
+            572,
+            1222,
+            777
+          ]
+        ]
+      },
+      "tumble": {
+        "sheet": "planche_deplacements.png",
+        "loop": true,
+        "rects": [
+          [
+            1228,
+            556,
+            1380,
+            777
+          ]
+        ]
+      },
+      "land": {
+        "sheet": "planche_deplacements.png",
+        "fps": 12,
+        "loop": false,
+        "rects": [
+          [
+            22,
+            843,
+            157,
+            1010
+          ],
+          [
+            130,
+            866,
+            320,
+            1010
+          ]
+        ]
+      },
+      "crouch": {
+        "sheet": "planche_deplacements.png",
+        "loop": true,
+        "rects": [
+          [
+            488,
+            853,
+            637,
+            1012
+          ]
+        ]
+      },
+      "shield": {
+        "sheet": "planche_deplacements.png",
+        "loop": true,
+        "rects": [
+          [
+            703,
+            843,
+            862,
+            1012
+          ]
+        ]
+      },
+      "dodge": {
+        "sheet": "planche_deplacements.png",
+        "fps": 14,
+        "loop": false,
+        "rects": [
+          [
+            888,
+            848,
+            1116,
+            1012
+          ],
+          [
+            1116,
+            853,
+            1302,
+            1012
+          ],
+          [
+            1302,
+            848,
+            1512,
+            1012
+          ]
+        ]
+      },
+      "victory": {
+        "sheet": "planche_speciaux_cote.png",
+        "fps": 3,
+        "loop": false,
+        "rects": [
+          [
+            1498,
+            100,
+            1750,
+            378
+          ]
+        ],
+        "scale": 0.68
+      },
+      "jab": {
+        "sheet": "planche_attaques.png",
+        "phased": true,
+        "rects": [
+          [
+            253,
+            56,
+            377,
+            197
+          ],
+          [
+            370,
+            56,
+            502,
+            197
+          ],
+          [
+            610,
+            56,
+            737,
+            197
+          ]
+        ],
+        "scale": 1.4
+      },
+      "ftilt": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            878,
+            56,
+            1003,
+            197
+          ],
+          [
+            1003,
+            56,
+            1147,
+            197
+          ],
+          [
+            1143,
+            56,
+            1292,
+            197
+          ],
+          [
+            1283,
+            56,
+            1412,
+            197
+          ]
+        ],
+        "scale": 1.4
+      },
+      "utilt": {
+        "sheet": "planche_attaques.png",
+        "phased": true,
+        "rects": [
+          [
+            148,
+            262,
+            258,
+            402
+          ],
+          [
+            378,
+            250,
+            492,
+            402
+          ],
+          [
+            600,
+            262,
+            722,
+            402
+          ]
+        ],
+        "scale": 1.4
+      },
+      "dtilt": {
+        "sheet": "planche_attaques.png",
+        "phased": true,
+        "rects": [
+          [
+            873,
+            262,
+            988,
+            402
+          ],
+          [
+            993,
+            262,
+            1142,
+            402
+          ],
+          [
+            1408,
+            262,
+            1518,
+            402
+          ]
+        ],
+        "scale": 1.4
+      },
+      "nair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            163,
+            458,
+            292,
+            602
+          ],
+          [
+            303,
+            458,
+            458,
+            602
+          ],
+          [
+            463,
+            458,
+            607,
+            602
+          ]
+        ],
+        "scale": 1.4
+      },
+      "fair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            873,
+            458,
+            1003,
+            602
+          ],
+          [
+            1133,
+            458,
+            1268,
+            602
+          ],
+          [
+            1263,
+            458,
+            1398,
+            602
+          ]
+        ],
+        "scale": 1.4
+      },
+      "uair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            163,
+            648,
+            282,
+            790
+          ],
+          [
+            308,
+            630,
+            447,
+            790
+          ],
+          [
+            443,
+            620,
+            572,
+            790
+          ]
+        ],
+        "scale": 1.4
+      },
+      "dair": {
+        "sheet": "planche_attaques.png",
+        "rects": [
+          [
+            878,
+            648,
+            993,
+            790
+          ],
+          [
+            1013,
+            648,
+            1137,
+            790
+          ],
+          [
+            1118,
+            650,
+            1277,
+            792
+          ]
+        ],
+        "scale": 1.4
+      },
+      "special_neutral": {
+        "sheet": "planche_speciaux_neutre.png",
+        "main": false,
+        "tight": 0,
+        "rects": [
+          [
+            8,
+            4,
+            210,
+            247
+          ],
+          [
+            255,
+            4,
+            462,
+            247
+          ],
+          [
+            488,
+            4,
+            722,
+            247
+          ],
+          [
+            728,
+            4,
+            978,
+            247
+          ],
+          [
+            978,
+            4,
+            1238,
+            247
+          ],
+          [
+            1228,
+            4,
+            1498,
+            247
+          ],
+          [
+            252,
+            262,
+            492,
+            497
+          ],
+          [
+            498,
+            262,
+            748,
+            497
+          ],
+          [
+            1262,
+            262,
+            1494,
+            497
+          ]
+        ],
+        "scale": 0.87
+      },
+      "special_side": {
+        "sheet": "planche_speciaux_cote.png",
+        "phased": true,
+        "rects": [
+          [
+            25,
+            110,
+            322,
+            372
+          ],
+          [
+            405,
+            150,
+            668,
+            368
+          ],
+          [
+            1498,
+            100,
+            1750,
+            378
+          ]
+        ],
+        "scale": 0.68
+      },
+      "special_up": {
+        "sheet": "planche_speciaux_haut.png",
+        "rects": [
+          [
+            222,
+            190,
+            368,
+            388
+          ],
+          [
+            398,
+            145,
+            613,
+            392
+          ],
+          [
+            638,
+            95,
+            838,
+            392
+          ],
+          [
+            853,
+            85,
+            1043,
+            392
+          ],
+          [
+            1078,
+            10,
+            1308,
+            388
+          ]
+        ],
+        "scale": 0.9
+      },
+      "special_down": {
+        "sheet": "planche_speciaux_bas.png",
+        "phased": true,
+        "rects": [
+          [
+            310,
+            95,
+            602,
+            332
+          ],
+          [
+            618,
+            85,
+            1002,
+            338
+          ],
+          [
+            58,
+            98,
+            228,
+            332
+          ]
+        ],
+        "scale": 0.82
+      },
+      "fx_tree": {
+        "sheet": "planche_speciaux_bas.png",
+        "main": false,
+        "rects": [
+          [
+            68,
+            432,
+            312,
+            732
+          ]
+        ]
+      },
+      "fx_tree_fire": {
+        "sheet": "planche_speciaux_bas.png",
+        "main": false,
+        "rects": [
+          [
+            408,
+            432,
+            668,
+            732
+          ]
+        ]
+      },
+      "fx_snow": {
+        "sheet": "planche_speciaux_bas.png",
+        "main": false,
+        "unmatte": [
+          0,
+          0,
+          0
+        ],
+        "rects": [
+          [
+            368,
+            862,
+            588,
+            953
+          ]
+        ]
+      },
+      "fx_heartbeam": {
+        "sheet": "planche_attaques.png",
+        "main": false,
+        "unmatte": [
+          0,
+          0,
+          0
+        ],
+        "rects": [
+          [
+            494,
+            860,
+            630,
+            992
+          ]
+        ]
+      },
+      "fx_hit_heart": {
+        "sheet": "planche_speciaux_haut.png",
+        "main": false,
+        "unmatte": [
+          0,
+          0,
+          0
+        ],
+        "rects": [
+          [
+            498,
+            798,
+            708,
+            982
+          ]
+        ]
+      },
+      "fx_trail": {
+        "sheet": "planche_speciaux_cote.png",
+        "main": false,
+        "rects": [
+          [
+            28,
+            498,
+            418,
+            634
+          ]
+        ]
+      }
+    },
+    "hiTolerance": 40
   }
 }

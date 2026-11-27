@@ -185,7 +185,8 @@ async function atlasSprite(def, alt, sd) {
   const anims = {};
   for (const [name, a] of Object.entries(sp.animations)) {
     anims[name] = {
-      frames: a.frames.map(([sx, sy, sw, sh, ax, ay]) => ({ img, sx: sx / f, sy: sy / f, sw: sw / f, sh: sh / f, ax: ax / f, ay: ay / f, scale })),
+      // 7e valeur optionnelle : correction d'échelle de la pose (dessinée plus grande ou plus petite sur la planche)
+      frames: a.frames.map(([sx, sy, sw, sh, ax, ay, m = 1]) => ({ img, sx: sx / f, sy: sy / f, sw: sw / f, sh: sh / f, ax: ax / f, ay: ay / f, scale: scale * m })),
       fps: a.fps ?? 10,
       loop: a.loop ?? LOOPING.has(name),
       phased: !!a.phased,

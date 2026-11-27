@@ -36,7 +36,9 @@ export function buildMoves(char, frameMult = 1) {
   // Les zones de coup ont été pensées pour un perso de 25 de haut : on les met à la taille du sprite.
   const k = Math.max(1, Math.min(1.45, (char.stats?.height ?? 25) / 25));
   const fit = (h) => ({ ...h, x: h.x * k, y: h.y * k, w: h.w * k, h: h.h * k });
-  for (const [name, base] of Object.entries(DEFAULT_MOVES)) {
+  // Coups propres au perso (riposte, attaque montée…) : décrits entièrement dans character.json
+  const extra = Object.fromEntries(Object.keys(char.moves || {}).filter((n) => !DEFAULT_MOVES[n]).map((n) => [n, { startup: 5, active: 5, endlag: 10, hits: [] }]));
+  for (const [name, base] of Object.entries({ ...DEFAULT_MOVES, ...extra })) {
     const ov = char.moves?.[name] || {};
     // hits: [] = coup sans zone de frappe (invocation, projectile) ; sinon on complète les zones par défaut
     const hits = ov.hits?.length === 0 ? [] : base.hits.map((h, i) => fit({ ...h, ...(ov.hits?.[i] || {}) }));
